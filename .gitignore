@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyCharm files
+.idea/
+.idea/*
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+venv3/
+
+# temporary file
+tmp.mp3
+tts.mp3
+
+# large .dat file
+.dat
+
+# image data
+#images/
+images_*/
+
+# ignore DS cloud
+.DS_Store
