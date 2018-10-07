@@ -29,3 +29,6 @@ images_*/
 
 # ignore DS cloud
 .DS_Store
+
+# ignore large capture video file
+capture*.mov
