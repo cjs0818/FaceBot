@@ -17,6 +17,7 @@
 import cv2
 import os
 import datetime
+import time
 
 
 #-------------------------------------------------------------
@@ -182,6 +183,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
     else:
         # 음성인식 아닌 경우, 테스트 query에 대해 문장 단위로 테스트
         query = [
+            "최종석 박사님 계신 곳이 어디에요?",
             "사람",
                 "아나스타샤를 찾으러 왔어요",
 #            "안녕, 안내를 부탁해요",
@@ -392,18 +394,19 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 
             # ===============================
             # TTS
-            param = {
-                'tts_enable': tts_enable,
-                'stt_enable': stt_enable,
-                'ani_multiprocessing': ani_multiprocessing,
-                'ad_event': ad_event,
-                'video_path': video_path,
-                'audio_enable': 0,
-                'pause': 0,
-                'video_delay': 100,
-                'audio_length': len(message)
-            }
-            tts_animation(message, tts, av, web_api, gsp, obj_track, param)
+            if tts_enable == 1:
+                param = {
+                    'tts_enable': tts_enable,
+                    'stt_enable': stt_enable,
+                    'ani_multiprocessing': ani_multiprocessing,
+                    'ad_event': ad_event,
+                    'video_path': video_path,
+                    'audio_enable': 0,
+                    'pause': 0,
+                    'video_delay': 100,
+                    'audio_length': len(message)
+                }
+                tts_animation(message, tts, av, web_api, gsp, obj_track, param)
             # ===============================
 
 
@@ -435,18 +438,19 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 
             # ===============================
             # TTS
-            param = {
-                'tts_enable': tts_enable,
-                'stt_enable': stt_enable,
-                'ani_multiprocessing': ani_multiprocessing,
-                'ad_event': ad_event,
-                'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Person_Place.mov',
-                'audio_enable': 0,
-                'pause': 0,
-                'video_delay': 100,
-                'audio_length': len(message)
-            }
-            tts_animation(message, tts, av, web_api, gsp, obj_track, param)
+            if tts_enable == 1:
+                param = {
+                    'tts_enable': tts_enable,
+                    'stt_enable': stt_enable,
+                    'ani_multiprocessing': ani_multiprocessing,
+                    'ad_event': ad_event,
+                    'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Person_Place.mov',
+                    'audio_enable': 0,
+                    'pause': 0,
+                    'video_delay': 100,
+                    'audio_length': len(message)
+                }
+                tts_animation(message, tts, av, web_api, gsp, obj_track, param)
             # ===============================
         # 사용자가 다가온 경우 (그 순간만 수행) - 끝
         # ----------------------------------------
@@ -462,18 +466,19 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 
                 # ===============================
                 # TTS
-                param = {
-                    'tts_enable': tts_enable,
-                    'stt_enable': stt_enable,
-                    'ani_multiprocessing': ani_multiprocessing,
-                    'ad_event': ad_event,
-                    'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_GoodBye.mov',
-                    'audio_enable': 0,
-                    'pause': 0,
-                    'video_delay': 100,
-                    'audio_length': len(message)
-                }
-                tts_animation(message, tts, av, web_api, gsp, obj_track, param)
+                if tts_enable == 1:
+                    param = {
+                        'tts_enable': tts_enable,
+                        'stt_enable': stt_enable,
+                        'ani_multiprocessing': ani_multiprocessing,
+                        'ad_event': ad_event,
+                        'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_GoodBye.mov',
+                        'audio_enable': 0,
+                        'pause': 0,
+                        'video_delay': 100,
+                        'audio_length': len(message)
+                    }
+                    tts_animation(message, tts, av, web_api, gsp, obj_track, param)
                 # ===============================
 
             dialog_flag = False  # Enable dialog when APPROACH, Disable when dialog end   # 대화 종료 시, 카메라 인식을 위해 음성인식을 끈다. -> ACTION_EVENT_APPROACH 이벤트 발생 시 다시 stt_enable = 1로 켠다
@@ -487,31 +492,36 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
         elif ad_state == ACTION_STATE_FACE_DETECTED:
             # ---------------------------
             # 음성인식 시작
-            try:
-                if dialog_flag:
-                    if stt_enable == 1:
-                        # -------------------------------
-                        # STT 재시작
-                        #print("------- 음성인식 대기중 -------")
-                        gsp.resumeMic()
-                        block = False
+            if dialog_flag:
+                if stt_enable == 1:
+                    # -------------------------------
+                    # STT 재시작
+                    # print("------- 음성인식 대기중 -------")
+                    gsp.resumeMic()
+
+                    block = False
+                    # block = True
+                    content = None
+
+                    try:
+                        #content = gsp._buff.get(False)
                         content = gsp.getText(block)
                         if content is not None:
-                            print (content)
+                            print(content)
+
                         else:
                             # 구글 음성인식기의 경우 1분 제한을 넘으면 None 발생 -> 다시 클래스를 생성시킴
                             print("Recreate Gspeech()!")
                             del gsp
                             gsp = Gspeech()
-                    else:
-                        q_iter = q_iter + 1
-                        dialog_flag = q_iter < q_length
-                        content = query[q_iter-1]
-
-            except Exception as e:
-                # 음성인식기의 block=False로 해 놓았을 때, 아직 버퍼에 쌓이지 않으면 오류 처리
-                content = None
-                pass
+                            content = None
+                    except:
+                        # 아직 버퍼에 아무것도 없을 때
+                        pass
+                else:
+                    q_iter = q_iter + 1
+                    dialog_flag = q_iter < q_length
+                    content = query[q_iter - 1]
             # 음성인식 끝
             # ---------------------------
 
@@ -531,19 +541,20 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 
                 # ===============================
                 # TTS
-                param = {
-                    'tts_enable': tts_enable,
-                    'stt_enable': stt_enable,
-                    'ani_multiprocessing': ani_multiprocessing,
-                    'ad_event': ad_event,
-                    'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
-                    'audio_enable': 0,
-                    'pause': 0,
-                    'video_delay': 120,
-                    'audio_length': len(message)
-                }
-                tts_animation(message, tts, av, web_api, gsp, obj_track, param,
-                              BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
+                if tts_enable == 1:
+                    param = {
+                        'tts_enable': tts_enable,
+                        'stt_enable': stt_enable,
+                        'ani_multiprocessing': ani_multiprocessing,
+                        'ad_event': ad_event,
+                        'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
+                        'audio_enable': 0,
+                        'pause': 0,
+                        'video_delay': 120,
+                        'audio_length': len(message)
+                    }
+                    tts_animation(message, tts, av, web_api, gsp, obj_track, param,
+                                  BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
                 # ===============================
 
                 if (u'끝내자' in content):
@@ -606,19 +617,20 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 
                     # ===============================
                     # TTS
-                    param = {
-                        'tts_enable': tts_enable,
-                        'stt_enable': stt_enable,
-                        'ani_multiprocessing': ani_multiprocessing,
-                        'ad_event': ad_event,
-                        'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
-                        'audio_enable': 0,
-                        'pause': 0,
-                        'video_delay': 150,
-                        'audio_length': len(message)
-                    }
-                    tts_animation(message, tts, av, web_api, gsp, obj_track, param,
-                                  BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
+                    if tts_enable == 1:
+                        param = {
+                            'tts_enable': tts_enable,
+                            'stt_enable': stt_enable,
+                            'ani_multiprocessing': ani_multiprocessing,
+                            'ad_event': ad_event,
+                            'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
+                            'audio_enable': 0,
+                            'pause': 0,
+                            'video_delay': 150,
+                            'audio_length': len(message)
+                        }
+                        tts_animation(message, tts, av, web_api, gsp, obj_track, param,
+                                      BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
                     # ===============================
 
                     print(json.dumps(answer, indent=4, ensure_ascii=False))
@@ -666,8 +678,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 #----------------------------------------------------
 if __name__ == '__main__':
 
-    stt_enable = 1  # 0: Disable speech recognition (STT), 1: Enable it
-    tts_enable = 1  # 0: Disable speech synthesis (TTS),   1: Enable it
+    stt_enable = 0  # 0: Disable speech recognition (STT), 1: Enable it
+    tts_enable = 0  # 0: Disable speech synthesis (TTS),   1: Enable it
 
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
