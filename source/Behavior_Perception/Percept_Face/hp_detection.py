@@ -82,7 +82,7 @@ class HeadPose():
             dist_ratio = dist / (d.right() - d.left())
 
             roi_ratio_th = 0.15
-            dist_ratio_th = 0.75  # 0.03
+            dist_ratio_th = 0.25 # 0.75  # 0.03
             #print(" ")
             #print("roi_ratio: %3.2f, dist_ratio: %5.4f" % (roi_ratio, dist_ratio))
             if roi_ratio > roi_ratio_th and dist_ratio < dist_ratio_th:
@@ -130,7 +130,7 @@ class HeadPose():
         # Project a 3D point (0, 0, 1000.0) onto the image plane.
         # We use this to draw a line sticking out of the nose
 
-        (nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(0.0, 0.0, 1000.0)]), rotation_vector,
+        (nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(0.0, 0.0, 250.0)]), rotation_vector,
                                                          translation_vector, camera_matrix, dist_coeffs)
 
         for p in image_points:

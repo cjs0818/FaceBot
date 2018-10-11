@@ -195,7 +195,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 #            "안녕, 안내를 부탁해요",
 #            "사람",
 #                "여진구 박사님이요",
-                "끝내자"
+#                "끝내자"
                  ]
         q_length = len(query)
         q_iter = 0
@@ -519,9 +519,14 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
                         # 아직 버퍼에 아무것도 없을 때
                         pass
                 else:
-                    q_iter = q_iter + 1
-                    dialog_flag = q_iter < q_length
-                    content = query[q_iter - 1]
+                    if (q_iter < q_length):
+                        q_iter = q_iter + 1
+                        #dialog_flag = q_iter < q_length
+                        print("q_iter=%2d, q_length=%2d" % (q_iter, q_length))
+                        content = query[q_iter - 1]
+                    else:
+                        dialog_flag = False
+                        #q_iter = 0
             # 음성인식 끝
             # ---------------------------
 
