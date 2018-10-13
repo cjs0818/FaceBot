@@ -23,7 +23,7 @@ Flask		# web server
 
 ffpyplayer	# To play video file (MediaPlayer)
 
-Python-vlc	# To play video file
+#Python-vlc	# To play video file
 
 #glib
 #dbus-python
