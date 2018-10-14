@@ -15,7 +15,7 @@ def main():
     message = "안녕하세요."
     message = message + message + message + message + message
     ani_parameter = {
-            'video_path': "./",
+            'video_path': "./ani01_unknown_approach.mov",
             'pause': 0,
             'audio_enable': 0,
             'video_delay': 100,
