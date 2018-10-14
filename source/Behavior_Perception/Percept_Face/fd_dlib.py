@@ -16,6 +16,12 @@ detector = dlib.get_frontal_face_detector()
 cap = cv2.VideoCapture(0)
 cap.set(3, 320)
 cap.set(4, 240)
+#--------------------
+# For Raspberry Pi 3
+#cap = cv2.VideoCapture(-1)
+#cap.set(3, 640)
+#cap.set(4, 480)
+#--------------------
 
 
 
@@ -23,7 +29,7 @@ cap.set(4, 240)
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 
     # ---------------------------------

@@ -41,9 +41,16 @@ face_descriptor_p = []
 
 
 
-cap = cv2.VideoCapture(0)
-cap.set(3, 320)
-cap.set(4, 240)
+#cap = cv2.VideoCapture(0)
+#cap.set(3, 320)
+#cap.set(4, 240)
+
+#-------------------------
+# For Raspberry Pi3
+cap = cv2.VideoCapture(-1)
+cap.set(3, 640)
+cap.set(4, 480)
+#-------------------------
 
 
 
@@ -60,7 +67,8 @@ model_points = np.array([
 
 
 def load_registered_face():
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__)) + "/.."   # images 폴더가 있는 위치
+    #BASE_DIR = os.path.dirname(os.path.abspath(__file__)) + "/.."   # images 폴더가 있는 위치
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # images 폴더가 있는 위치
     image_dir = os.path.join(BASE_DIR, "images")
 
     current_id = 0
@@ -84,7 +92,7 @@ def load_registered_face():
 
                     #frame = Image.open(image_file)
                     frame = cv2.imread(path, cv2.IMREAD_COLOR)
-                    frame = cv2.resize(frame, (320, 320))
+                    frame = cv2.resize(frame, (640, 480))
 
                     # ---------------------------------
                     # Recognize by Dlib
