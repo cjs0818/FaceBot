@@ -10,6 +10,10 @@ import cv2
 from multiprocessing import Process, Queue
 import os
 
+# ----------------------------------------------------------
+#  naver_tts.py: NaverTTS
+from Behavior_Expression.Act_Speech.naver_tts import NaverTTS  # TTS: NaverTTS
+
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -18,7 +22,8 @@ ani_parameter = {
     'pause': 1,
     'audio_enable': 0,
     'video_delay': 90,
-    'audio_length': 0
+    'audio_length': 0,
+    'loop_path': []
 }
 q_param = Queue()
 q_param.put(ani_parameter)
@@ -44,6 +49,8 @@ class Play_AV():
         grabbed, play_frame = self.video.read()
         cv2.imshow(winname, play_frame)
         # ------------------------------
+
+
 
     def play_av_idle(self):
         winname = self.winname
@@ -119,6 +126,7 @@ def animation(q):   # multiprocessing Process with Queue
     video_delay = 90
     av = Play_AV(video_path, winname, win_pos_x, win_pos_y, video_delay)
 
+
     while True:
 
         if(q.empty()):
@@ -131,8 +139,17 @@ def animation(q):   # multiprocessing Process with Queue
             audio_enable = param['audio_enable']
             video_delay = param['video_delay']
             audio_length = param['audio_length']
+            loop_path = param['loop_path']
 
-            key_in = av.play_av_normal(video_path, pause, audio_enable, video_delay, audio_length)
+            cnt = 0
+            if video_path == loop_path:
+                cnt_th = int(audio_length / 15) + 1
+            else:
+                cnt_th = 1
+
+            while cnt < cnt_th:
+                cnt += 1
+                key_in = av.play_av_normal(video_path, pause, audio_enable, video_delay, audio_length)
 
         if key_in == ord("q"):
             break
@@ -165,8 +182,20 @@ def message():
         '''
         ani_parameter = post['param']
 
+        ani_parameter['speech'] = post['speech']   # inserted 'speech' for NaverTTS in animation
 
         q_param.put(ani_parameter)
+
+
+
+        # --------------------------------
+        # Create NaverTTS Class
+        tts = NaverTTS(0, -1)  # Create a NaverTTS() class from tts/naver_tts.py
+        # self.tts.play("안녕하십니까?")
+        message = post['speech']
+        block = True
+        tts.play(message, block)
+
 
 
         resp = Response('로그인 성공!',status=200)

@@ -2,11 +2,20 @@
 
 import json
 
+# ----------------------------------------------------------
+#  naver_tts.py: NaverTTS
+from Behavior_Expression.Act_Speech.naver_tts import NaverTTS  # TTS: NaverTTS
+
 # -----------------------
 # Web_API class for web POST
 from Interface.Web.post import Web_API
 
 def main():
+    # --------------------------------
+    # Create NaverTTS Class
+    tts = NaverTTS(0,-1)    # Create a NaverTTS() class from tts/naver_tts.py
+    #tts.play("안녕하십니까?")
+
     # -----------------------
     # Web_API class for web POST
     web_api = Web_API()
@@ -27,6 +36,9 @@ def main():
         }
 
     web_api.send_post(data_send, url)
+
+    #block = True
+    #tts.play(message, block)
 
 #----------------------------------------------------
 # 메인 함수

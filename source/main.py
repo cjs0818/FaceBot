@@ -149,7 +149,8 @@ def tts_animation(message, tts, av, web_api, gsp, obj_track, param, loop_path=[]
                 'pause': pause,
                 'audio_enable': audio_enable,
                 'video_delay': video_delay,
-                'audio_length': audio_length
+                'audio_length': audio_length,
+                'loop_path': loop_path
             }
             data_send = {
                 'speech': message,
@@ -158,6 +159,8 @@ def tts_animation(message, tts, av, web_api, gsp, obj_track, param, loop_path=[]
             url = 'http://localhost:60000/message'
 
             try:
+                web_api.send_post(data_send, url)
+                '''
                 cnt = 0
                 if video_path == loop_path:
                     cnt_th = int(len(message) / 15) + 1
@@ -167,13 +170,14 @@ def tts_animation(message, tts, av, web_api, gsp, obj_track, param, loop_path=[]
                 while cnt < cnt_th:
                     cnt += 1
                     web_api.send_post(data_send, url)
+                '''
             except:
                 print("You must execute main_server.py in 'animation' folder!!! ")
                 print("Type Ctrl-c to exit!     SDA")
                 input()
 
-            block = True
-            tts.play(message, block)
+            #block = True
+            #tts.play(message, block)
 
 
 def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
@@ -683,8 +687,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 #----------------------------------------------------
 if __name__ == '__main__':
 
-    stt_enable = 0  # 0: Disable speech recognition (STT), 1: Enable it
-    tts_enable = 0  # 0: Disable speech synthesis (TTS),   1: Enable it
+    stt_enable = 1  # 0: Disable speech recognition (STT), 1: Enable it
+    tts_enable = 1  # 0: Disable speech synthesis (TTS),   1: Enable it
 
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
