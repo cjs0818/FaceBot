@@ -18,8 +18,9 @@ def main():
     message = "안녕하세요."
     message = message + message + message + message + message
 
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    video_path = BASE_DIR + '/ani01_Hi_Short.mov'
+    #BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    #video_path = BASE_DIR + '/ani01_Hi_Short.mov'
+    video_path = './ani01_Hi_Short.mov'
     ani_parameter = {
             'video_path': video_path,
             'pause': 0,
