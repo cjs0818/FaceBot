@@ -17,7 +17,7 @@
 	$ brew upgrade pyenv  # It may generate some error message like "pyenv 1.2.7 already installed", but you can neglect it.
 	```
     - In Linux,
-      Ref: [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv) 설치방법 참조
+      - Ref: [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv) 설치방법 참조
     
     - PATH 설정 (~/.bash_profile 또는 ~/.bashrc에 아래 내용 추가)
     ```
