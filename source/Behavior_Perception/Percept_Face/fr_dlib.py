@@ -128,23 +128,6 @@ class FaceRecog():
                                 face_descriptor_sum = np.add(face_descriptor_sum, face_descriptor)
 
 
-                        '''
-                        if current_id == 0 or not label in label_ids.values():
-                            if(current_id > 0):
-                                if(each_label_cnt > 0):
-                                    print("(current_id, each_label_cnt) = (%2d, %2d)" % (current_id, each_label_cnt))
-                                    fd_avg = np.divide(face_descriptor_sum, each_label_cnt)
-                                    fd_known.append(fd_avg)
-                                else:
-                                    label_ids.popitem()
-                                    current_id -= 1
-
-                            #label_ids[current_id] = label
-                            label_ids.update({current_id: label})
-                            current_id += 1
-                            each_label_cnt = 0
-                            face_descriptor_sum = np.zeros(128)
-                        '''
         if(each_label_cnt > 0):
             fd_known.append(np.divide(face_descriptor_sum, each_label_cnt))
         else:
