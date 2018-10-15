@@ -62,12 +62,13 @@ class FaceRecog():
         #PARENT_DIR = os.path.dirname(os.path.abspath(__file__)) + "/.."   # images 폴더가 있는 위치
         image_dir = os.path.join(BASE_DIR, "images")
 
-        current_id = 0
+        current_id = -1
         label_ids = {0:"test"}
 
-        each_label_cnt = 0
+        each_label_cnt = -1
         face_descriptor_sum = np.zeros(128)
         fd_known = []
+        label_ids = dict()
 
         for root, dirs, files in os.walk(image_dir):
             for file in files:
@@ -83,6 +84,23 @@ class FaceRecog():
                         frame = cv2.imread(path, cv2.IMREAD_COLOR)
                         frame = cv2.resize(frame, (320, 320))
 
+                        if not label in label_ids.values():
+                            if(current_id > -1):
+                                if(each_label_cnt > 0):
+                                    print("(current_id, each_label_cnt) = (%2d, %2d)" % (current_id, each_label_cnt))
+                                    fd_avg = np.divide(face_descriptor_sum, each_label_cnt)
+                                    fd_known.append(fd_avg)
+                                else:
+                                    label_ids.popitem()
+                                    current_id -= 1
+
+                            #label_ids[current_id] = label
+                            current_id += 1
+                            label_ids.update({current_id: label})
+                            each_label_cnt = 0
+                            face_descriptor_sum = np.zeros(128)
+
+
                         # ---------------------------------
                         # Recognize by Dlib
 
@@ -90,28 +108,31 @@ class FaceRecog():
                         # second argument indicates that we should upsample the image 1 time. This
                         # will make everything bigger and allow us to detect more faces.
                         dets = self.detector(frame, 1)
-                        #print("Number of faces detected: {}".format(len(dets)))
+                        print("Number of faces detected: {}".format(len(dets)))
 
+                        kd_loop_cnt = 0
                         for k, d in enumerate(dets):
-                            each_label_cnt += 1
+                            kd_loop_cnt += 1
+                            if(kd_loop_cnt == 1):
+                                each_label_cnt += 1
 
-                            # Get the landmarks/parts for the face in box d.
-                            shape = self.sp(frame, d)
+                                # Get the landmarks/parts for the face in box d.
+                                shape = self.sp(frame, d)
 
-                            # Compute the 128D vector that describes the face in img identified by
-                            # shape.  In general, if two face descriptor vectors have a Euclidean
-                            # distance between them less than 0.6 then they are from the same
-                            # person, otherwise they are from different people. Here we just print
-                            # the vector to the screen.
-                            face_descriptor = self.facerec.compute_face_descriptor(frame, shape)
-                            face_descriptor_sum = np.add(face_descriptor_sum, face_descriptor)
+                                # Compute the 128D vector that describes the face in img identified by
+                                # shape.  In general, if two face descriptor vectors have a Euclidean
+                                # distance between them less than 0.6 then they are from the same
+                                # person, otherwise they are from different people. Here we just print
+                                # the vector to the screen.
+                                face_descriptor = self.facerec.compute_face_descriptor(frame, shape)
+                                face_descriptor_sum = np.add(face_descriptor_sum, face_descriptor)
 
 
-
+                        '''
                         if current_id == 0 or not label in label_ids.values():
                             if(current_id > 0):
                                 if(each_label_cnt > 0):
-                                    #print("(current_id, each_label_cnt) = (%2d, %2d)" % (current_id, each_label_cnt))
+                                    print("(current_id, each_label_cnt) = (%2d, %2d)" % (current_id, each_label_cnt))
                                     fd_avg = np.divide(face_descriptor_sum, each_label_cnt)
                                     fd_known.append(fd_avg)
                                 else:
@@ -123,6 +144,7 @@ class FaceRecog():
                             current_id += 1
                             each_label_cnt = 0
                             face_descriptor_sum = np.zeros(128)
+                        '''
         if(each_label_cnt > 0):
             fd_known.append(np.divide(face_descriptor_sum, each_label_cnt))
         else:
