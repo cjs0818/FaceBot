@@ -18,8 +18,7 @@
 	```
     - In Linux,
     ```
-    $ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
-    $ sudo apt-get install pyenv
+    $ https://github.com/pyenv/pyenv   # 설치방법 참조
     ```
     - PATH 설정 (~/.bash_profile 또는 ~/.bashrc에 아래 내용 추가)
     ```
