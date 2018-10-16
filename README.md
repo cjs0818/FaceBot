@@ -18,6 +18,10 @@
 	```
     - In Linux,
       - Ref: [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv) 설치방법 참조
+      ```
+      $ curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+      $ pyenv update
+      ```
     
     - PATH 설정 (~/.bash_profile 또는 ~/.bashrc에 아래 내용 추가)
     ```
