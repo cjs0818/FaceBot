@@ -25,7 +25,7 @@ tts.mp3
 
 # image data
 #images/
-images_*/
+#images_*/
 
 # ignore DS cloud
 .DS_Store
