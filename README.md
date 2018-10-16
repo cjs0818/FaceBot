@@ -28,7 +28,7 @@
     export PYENV_ROOT="$HOME/.pyenv"
 	export PATH="$PYENV_ROOT/bin:$PATH"
 	eval "$(pyenv init -)"
-	source ~/.bash_profile
+	eval "$(pyenv virtualenv-init -)"
     ```
     - 설치할 수 있는 목록 확인
     ```
