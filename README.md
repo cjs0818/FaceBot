@@ -17,11 +17,8 @@
 	$ brew upgrade pyenv  # It may generate some error message like "pyenv 1.2.7 already installed", but you can neglect it.
 	```
     - In Linux,
-    ```
-    $ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev
+      - Ref: [https://github.com/pyenv/pyenv](https://github.com/pyenv/pyenv) 설치방법 참조
     
-    $ sudo apt-get install pyenv
-    ```
     - PATH 설정 (~/.bash_profile 또는 ~/.bashrc에 아래 내용 추가)
     ```
     export PYENV_ROOT="$HOME/.pyenv"
