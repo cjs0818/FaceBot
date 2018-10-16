@@ -119,7 +119,7 @@ class Play_AV():
 
 
 def animation(q):   # multiprocessing Process with Queue
-    video_path = BASE_DIR + "/ani01_idle.mov"
+    video_path = BASE_DIR + "/ani01_Idle.mov"
     winname = "Video"
     win_pos_x = 0
     win_pos_y = 10
