@@ -58,8 +58,9 @@ RUN	service mongodb start
 
 
 # pyaudio
-#RUN	apt-get install -y libportaudio2 libportaudiocpp0 portaudio-ocaml portaudio-ocaml-dev
 RUN	apt-get install -y libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
+RUN	apt-get install -y vlc
+RUN	sed -i 's/geteuid/getppid/' /usr/bin/vlc
 
 ADD	requirements_linux.txt /root
 RUN	pip3 install -r /root/requirements_linux.txt

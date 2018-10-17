@@ -13,7 +13,8 @@ GPU=0
 EN0=enp0s5
 #EN0=enp0s31f6
 
-VIDEO=/dev/video2
+#VIDEO=/dev/video2
+VIDEO=/dev/video0
 
 
 #-------------
@@ -60,6 +61,7 @@ $DOCKER run -it --rm \
     --volume $XSOCK:$XSOCK:ro \
     --volume $WORKDIR:/root/work:rw \
     --device $VIDEO:/dev/video0 \
+    --device /dev/snd:/dev/snd \
     --name $NAME_ID \
     -p 60000:60000 \
     -p 27017:27017 \
