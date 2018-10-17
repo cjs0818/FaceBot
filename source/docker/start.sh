@@ -13,6 +13,8 @@ GPU=0
 EN0=enp0s5
 #EN0=enp0s31f6
 
+VIDEO=/dev/video2
+
 
 #-------------
 DISPLAY_IP=$(ifconfig $EN0 | grep inet | awk '$1=="inet" {print $2}')
@@ -57,8 +59,10 @@ $DOCKER run -it --rm \
     --env LIBGL_ALWAYS_INDIRECT=1 \
     --volume $XSOCK:$XSOCK:ro \
     --volume $WORKDIR:/root/work:rw \
+    --device $VIDEO:/dev/video0 \
     --name $NAME_ID \
     -p 60000:60000 \
+    -p 27017:27017 \
     $IMAGE_ID \
     /bin/bash
 #export containerId=$(docker ps -l -q)

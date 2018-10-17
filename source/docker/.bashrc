@@ -19,7 +19,7 @@ export LIBGL_ALWAYS_INDIRECT=1
 
 # google-cloud-vision
 export GOOGLE_PROJECT=chatbot-215901
-export GOOGLE_APPLICATION_CREDENTIALS="~/.config/gcloud/application_default_credentials.json"
+export GOOGLE_APPLICATION_CREDENTIALS="$HOME/.config/gcloud/application_default_credentials.json"
 #------------------------
 
 # The next line updates PATH for the Google Cloud SDK.

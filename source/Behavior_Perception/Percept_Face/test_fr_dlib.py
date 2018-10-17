@@ -41,15 +41,15 @@ face_descriptor_p = []
 
 
 
-#cap = cv2.VideoCapture(0)
-#cap.set(3, 320)
-#cap.set(4, 240)
+cap = cv2.VideoCapture(2)
+cap.set(3, 320)
+cap.set(4, 240)
 
 #-------------------------
 # For Raspberry Pi3
-cap = cv2.VideoCapture(-1)
-cap.set(3, 640)
-cap.set(4, 480)
+#cap = cv2.VideoCapture(-1)
+#cap.set(3, 640)
+#cap.set(4, 480)
 #-------------------------
 
 
