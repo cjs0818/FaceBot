@@ -37,6 +37,8 @@ class Play_AV():
         self.win_pos_y = y
         self.video_delay = video_delay
 
+        print(video_path)
+
         self.video = cv2.VideoCapture(video_path)
         grabbed, play_frame = self.video.read()
 
@@ -119,7 +121,7 @@ class Play_AV():
 
 
 def animation(q):   # multiprocessing Process with Queue
-    video_path = BASE_DIR + "/ani01_idle.mov"
+    video_path = BASE_DIR + "/ani01_Idle.mov"
     winname = "Video"
     win_pos_x = 0
     win_pos_y = 10

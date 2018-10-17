@@ -1,1 +1,1 @@
-docker build -f Dockerfile_raspberrypi3 -t pristine70/raspberrypi3_opencv .
+docker build -f Dockerfile -t pristine70/python3.6_opencv .

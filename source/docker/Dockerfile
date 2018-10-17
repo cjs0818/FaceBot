@@ -1,15 +1,20 @@
 #--------------------
 # For CUDA
-#FROM jschoi/yolo
-FROM nvidia/cuda
+##FROM jschoi/yolo
+#FROM nvidia/cuda
 #RUN ls -al
 #--------------------
 
+#--------------------
+# For RaspberryPi3
+#FROM demosense/raspberrypi3-opencv
+#--------------------
 
-# install ros packages
-#RUN apt-get update && apt-get install -y \
-#    ros-kinetic-desktop-full=1.3.1-0* \
-#    && rm -rf /var/lib/apt/lists/*
+#--------------------
+# For Ubuntu
+FROM python:3.6
+#--------------------
+
 
 # install vim
 #RUN apt-get update && apt-get install -y \
@@ -27,57 +32,36 @@ ADD .bashrc /root
 # setup environment variables?
 #ENV DISPLAY :0
 
-# OpenCV version
-ENV OPENCV_VERSION="3.4.0"
-
-
-
-#--------------------
-# For OpenCV
-
-# python 3.6
-RUN apt-get update \
-    && apt-get install -y software-properties-common curl \
-    && add-apt-repository ppa:jonathonf/python-3.6 \
-    && apt-get remove -y software-properties-common \
-    && apt autoremove -y \
-    && apt-get update \
-    && apt-get install -y python3.6 \
-    && curl -o /tmp/get-pip.py "https://bootstrap.pypa.io/get-pip.py" \
-    && python3.6 /tmp/get-pip.py \
-    && apt-get remove -y curl \
-    && apt autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
-
 
 RUN     apt-get update && \
         apt-get upgrade -y && \
-        apt-get install -y --no-install-recommends python python-dev python-pip build-essential cmake git pkg-config libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev libgtk2.0-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libatlas-base-dev gfortran libavresample-dev libgphoto2-dev libgstreamer-plugins-base1.0-dev libdc1394-22-dev  vim && \
-        pip install numpy && \
-        cd /opt && \
-        git clone https://github.com/opencv/opencv_contrib.git && \
-        cd opencv_contrib && \
-        git checkout ${OPENCV_VERSION} && \
-        cd /opt && \
-        git clone https://github.com/opencv/opencv.git && \
-        cd opencv && \
-        git checkout ${OPENCV_VERSION} && \
-        mkdir build && \
-        cd build && \
-        cmake   -D CMAKE_BUILD_TYPE=RELEASE \
-                -D BUILD_NEW_PYTHON_SUPPORT=ON \
-                -D CMAKE_INSTALL_PREFIX=/usr/local \
-                -D INSTALL_C_EXAMPLES=OFF \
-                -D INSTALL_PYTHON_EXAMPLES=OFF \
-                -D OPENCV_EXTRA_MODULES_PATH=/opt/opencv_contrib/modules \
-                -D PYTHON_EXECUTABLE=/usr/bin/python2.7 \
-                -D BUILD_EXAMPLES=OFF /opt/opencv && \
-        make -j $(nproc) && \
-        make install && \
-        ldconfig && \
-        apt-get purge -y git && \
-        apt-get clean && rm -rf /var/lib/apt/lists/* && \
-        rm -rf /opt/opencv*
+        apt-get install -y --no-install-recommends build-essential cmake git pkg-config && \
+	#apt-get install -y libtiff5-dev libjasper-dev libpng12-dev libgtk2.0-dev libavcodec-dev libavformat-dev libswscale-dev libv4l-dev libatlas-base-dev gfortran libavresample-dev libgphoto2-dev && \
+	apt-get install -y libgstreamer-plugins-base1.0-dev libdc1394-22-dev  vim && \
+        pip3 install numpy && \
+	apt-get install -y vim wget
+
+
+
+# pyenv
+# mongodb
+# Install MongoDB in Lunux
+#RUN	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 && \
+	#echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list && \
+	#apt-get update && \
+	#apt-get install -y mongodb-org && \   #### Error
+	#service mongod start
+# Run Mongo DB
+#RUN	mongo --host 127.0.0.1:27017
+
+RUN	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+RUN	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+#RUN	apt-get install -y mongodb-org
+
+
+ADD	requirements_linux.txt /root
+#RUN	pip3 install -r /root/requirements_linux.txt
+
 
 CMD /bin/bash
 

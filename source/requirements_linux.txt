@@ -17,9 +17,12 @@ opencv-contrib-python
 
 google-cloud-vision==0.30.1
 Pillow
+
+setuptools==39.1.0 # for tensorflow==1.9.0
 tensorflow==1.9.0  # python3.6.5 호환성문제시 -> (https://github.com/lakshayg/tensorflow-build)
+
 vlc
-#pyaudio
+pyaudio		# ← sudo apt-get install libportaudio2 libportaudiocpp0 portaudio-ocaml portaudio-ocaml-dev
 #pyobjc		# for OSX
 #playsound	# for OSX
 pymongo
@@ -28,8 +31,8 @@ google-cloud-speech==0.35.0	# Google Speech
 requests			# ChatBot
 Flask		# web server
 
-pic		# for ffpyplayer for RaspberryPi
-ffpyplayer	# To play video file (MediaPlayer)
+#pic		# for ffpyplayer for RaspberryPi
+#ffpyplayer	# To play video file (MediaPlayer)
 
 #Python-vlc	# To play video file
 
