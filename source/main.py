@@ -691,7 +691,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
 if __name__ == '__main__':
 
     stt_enable = 1  # 0: Disable speech recognition (STT), 1: Enable it
-    tts_enable = 0  # 0: Disable speech synthesis (TTS),   1: Enable it
+    tts_enable = 1  # 0: Disable speech synthesis (TTS),   1: Enable it
 
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
