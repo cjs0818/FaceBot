@@ -18,6 +18,7 @@ import cv2
 import os
 import datetime
 import time
+import sys
 
 
 #-------------------------------------------------------------
@@ -180,7 +181,7 @@ def tts_animation(message, tts, av, web_api, gsp, obj_track, param, loop_path=[]
             #tts.play(message, block)
 
 
-def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
+def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
     if stt_enable == 1:
         dialog_flag = True  # Enable speech recognition when APPROACH, Disable when dialog ends
         gsp = Gspeech()
@@ -206,7 +207,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
         dialog_flag = q_iter < q_length
 
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(cam_id)
     cap.set(3, 320)
     cap.set(4, 240)
 
@@ -694,4 +695,9 @@ if __name__ == '__main__':
 
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
-    main(stt_enable, tts_enable, ani_multiprocessing)
+    cam_id = 0
+
+    if len(sys.argv) == 2:
+       cam_id = int(sys.argv[1])
+       print("cam_id = %2d" % cam_id)
+    main(stt_enable, tts_enable, ani_multiprocessing, cam_id)

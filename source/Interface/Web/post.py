@@ -62,6 +62,9 @@ def test():
     }
 
     url = 'http://localhost:60000/message'
+    #url = 'http://127.0.0.1:60000/message'
+    #url = 'http://10.211.55.10:60000/message'
+    #url = 'http://172.17.0.1:60000/message'
 
 
     res = requests.post(url,

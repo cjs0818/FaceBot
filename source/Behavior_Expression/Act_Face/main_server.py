@@ -37,6 +37,8 @@ class Play_AV():
         self.win_pos_y = y
         self.video_delay = video_delay
 
+        print(video_path)
+
         self.video = cv2.VideoCapture(video_path)
         grabbed, play_frame = self.video.read()
 
@@ -217,5 +219,6 @@ if __name__ == '__main__':
 
     #app.run(host='0.0.0.0', port=60000, debug=True)
     app.run(host='0.0.0.0', port=60000, debug=True, use_reloader=False)
+    #app.run(host='127.0.0.1', port=60000, debug=True, use_reloader=False)
 
     proc.join()
