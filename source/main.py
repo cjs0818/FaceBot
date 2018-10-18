@@ -656,8 +656,10 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
         # ----------------------------------------
 
 
+
         #key_in = cv2.waitKey(20) & 0xFF
         key_in = cv2.waitKey(10) & 0xFF
+
         if key_in == ord('q'):
             break
         elif key_in == ord('c'):
@@ -688,7 +690,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1):
 if __name__ == '__main__':
 
     stt_enable = 1  # 0: Disable speech recognition (STT), 1: Enable it
-    tts_enable = 1  # 0: Disable speech synthesis (TTS),   1: Enable it
+    tts_enable = 0  # 0: Disable speech synthesis (TTS),   1: Enable it
 
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
