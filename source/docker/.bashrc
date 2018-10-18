@@ -40,6 +40,13 @@ if [ -f '~/work/GoogleCloudSDK/google-cloud-sdk/completion.bash.inc' ]; then sou
 #---------------------------
 # SetUp for jschoi's ChatBot
 export PYTHONPATH=~/work/ChatBot/FaceBot/source:$PYTHONPATH
+
 #-----------------------
 # multiprocessing of playsound in Python
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES 
+
+#-----------------------
+# easy cd
+export FACEBOT_HOME=~/work/ChatBot/FaceBot/source
+alias facebot="cd $FACEBOT_HOME"
+
