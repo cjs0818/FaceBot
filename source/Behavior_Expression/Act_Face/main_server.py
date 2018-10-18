@@ -88,8 +88,8 @@ class Play_AV():
             grabbed, play_frame = video.read()
             cv2.imshow(winname, play_frame)
         else:
-            if(audio_enable == 1):
-                player = MediaPlayer(video_path)
+            #if(audio_enable == 1):
+            #    player = MediaPlayer(video_path)
 
             cnt = 0
             cnt_th = int(audio_length / 15) + 1
@@ -99,8 +99,8 @@ class Play_AV():
 
                 while True:
                     grabbed, play_frame = video.read()
-                    if (audio_enable == 1):
-                        audio_frame, val = player.get_frame()
+                    #if (audio_enable == 1):
+                    #    audio_frame, val = player.get_frame()
                     if not grabbed:
                         print("End of video")
                         break
@@ -108,10 +108,10 @@ class Play_AV():
                     if key_in == ord("q"):
                         return key_in
                     cv2.imshow(winname, play_frame)
-                    if (audio_enable == 1):
-                        if val != 'eof' and audio_frame is not None:
-                            # audio
-                            img, t = audio_frame
+                    #if (audio_enable == 1):
+                    #    if val != 'eof' and audio_frame is not None:
+                    #        # audio
+                    #        img, t = audio_frame
 
         # ---------
         self.video.release

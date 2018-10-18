@@ -85,6 +85,7 @@ $ export PYTHONPATH=$BASE_DIR:$PYTHONPATH
   ```
 
 - If you do not have **Cmake** installed, install it first to use **Dlib** module.
+    - If ```$ sudo apt-get install cmake``` works, that's it. Otherwise,
     - Download the compressed Cmake software from [https://cmake.org/download/](https://cmake.org/download/)
       - [https://cmake.org/files/v3.12/cmake-3.12.2.tar.gz](https://cmake.org/files/v3.12/cmake-3.12.2.tar.gz)
     - Uncompress the downloaded file
