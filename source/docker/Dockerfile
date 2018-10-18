@@ -24,8 +24,6 @@ FROM python:3.6
 #    x11-apps \
 #    && rm -rf /var/lib/apt/lists/*
 
-# generate /root/work directory
-#WORKDIR /root/work
 
 # copy .bashrc from host to target /root directory
 ADD	.bashrc /root
@@ -84,6 +82,8 @@ RUN	cp /root/application_default_credentials.json ~/.config/gcloud
 RUN	export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_credentials.json
 RUN	chown -R $(whoami) ~/.config/gcloud/application_default_credentials.json
 
+# generate /root/work directory
+WORKDIR /root
 
 #ENTRYPOINT ["service","mongodb","start"]
 #CMD /bin/bash
