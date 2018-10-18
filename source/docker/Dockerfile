@@ -25,10 +25,11 @@ FROM python:3.6
 #    && rm -rf /var/lib/apt/lists/*
 
 # generate /root/work directory
-WORKDIR /root/work
+#WORKDIR /root/work
 
 # copy .bashrc from host to target /root directory
 ADD	.bashrc /root
+ADD	launch.sh /root
 
 # setup environment variables?
 #ENV DISPLAY :0
@@ -84,7 +85,9 @@ RUN	export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_c
 RUN	chown -R $(whoami) ~/.config/gcloud/application_default_credentials.json
 
 
-CMD /bin/bash
+#ENTRYPOINT ["service","mongodb","start"]
+#CMD /bin/bash
+
 
 #RUN cd /root; git clone https://github.com/opencv/opencv; cd /root/opencv; mkdir build; cd build; cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..; make; make install
 #-----------------
