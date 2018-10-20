@@ -276,6 +276,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
     coll_name = "Event"             # define a Collection
     mgdb_event = MongoDB(db_name, coll_name)
 
+
     # Test the 'find' of Mongo DB
     #eng_name = "jschoi"
     #name_dict = { "english_name": eng_name }
@@ -355,6 +356,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
             #  To find kor_name from eng_name using MongoDB or csv file
             #kor_name = mgdb.search("english_name", eng_name)
             kor_name = C_db.search(db, "english_name", eng_name)
+            print("Searching kor_name completed from csv") 
             # -----------------------------------------------
 
             #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach.mov'
@@ -367,18 +369,19 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                 # dict_contents = { "event": "approach", "name": kor_name, "datetime": datetime.datetime.now() }
                 # mgdb_event.coll.insert_one(dict_contents)
                 # -------------------------------
-                dt = []
-                for ret in mgdb_event.coll.find({"name": kor_name}):
-                    last_time = ret['datetime']
-                    now = datetime.datetime.now()
-                    dt = now - last_time
-                #print(dt)
-                #print("days: ", dt.days, ", seconds: ", dt.seconds)
-
 
                 event_detect.event_label = kor_name
                 message = kor_name + "님, 안녕하세요? 반갑습니다."
+
                 try:
+                    dt = []
+                    for ret in mgdb_event.coll.find({"name": kor_name}):
+                        last_time = ret['datetime']
+                        now = datetime.datetime.now()
+                        dt = now - last_time
+                    #print(dt)
+                    #print("days: ", dt.days, ", seconds: ", dt.seconds)
+
                     if dt.days > 0:
                         message = message + " " + str(dt.days) + "일만에 오셨군요."
                         how_long = str(dt.days) + "일"
@@ -388,6 +391,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                     #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach_memory.mov'
                     video_path = 'ani01_known_approach_memory.mov'
                 except Exception as e:
+                    print("We cannot find more information in MongoDB")
                     pass
                 print(message)
 
