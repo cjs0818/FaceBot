@@ -1,5 +1,15 @@
 # Face Detection, Head Pose Detection and Face Recognition with OpenCV(python)
 
+## Install Docker
+- Install docker
+  Refer to [https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository](http://https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository)
+
+- Install docker-compose
+  ```
+  $ sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+  $ sudo chmod +x /usr/local/bin/docker-compose
+  ```
+
 ## Install Python, pyenv, virtualenv
 - Install python3   (v3.6.5 is recommended, since v3.7 & above is not compatible with tensorflow yet)
 	- Ref: [https://beomi.github.io/2016/12/28/HowToSetup-Virtualenv-VirtualenvWrapper/](https://beomi.github.io/2016/12/28/HowToSetup-Virtualenv-VirtualenvWrapper/)

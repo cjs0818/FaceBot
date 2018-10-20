@@ -18,7 +18,8 @@ from Behavior_Expression.Act_Speech.naver_tts import NaverTTS  # TTS: NaverTTS
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ani_parameter = {
-    'video_path': BASE_DIR + "/ani01_known_approach.mov",
+#    'video_path': BASE_DIR + "/ani01_known_approach.mov",
+    'video_path': "ani01_known_approach.mov",
     'pause': 1,
     'audio_enable': 0,
     'video_delay': 90,
@@ -31,7 +32,8 @@ q_param.put(ani_parameter)
 class Play_AV():
     def __init__(self, video_path, winname, x, y, video_delay=90):
         self.param = dict()
-        self.idle_video_path = video_path
+        #self.idle_video_path = video_path
+        self.idle_video_path = os.path.join(BASE_DIR, video_path)
         self.winname = winname
         self.win_pos_x = x
         self.win_pos_y = y
@@ -151,6 +153,7 @@ def animation(q):   # multiprocessing Process with Queue
 
             while cnt < cnt_th:
                 cnt += 1
+                video_path = os.path.join(BASE_DIR, video_path)
                 key_in = av.play_av_normal(video_path, pause, audio_enable, video_delay, audio_length)
 
         if key_in == ord("q"):

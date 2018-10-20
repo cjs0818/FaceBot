@@ -226,7 +226,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         # ----------------------------
         # To Play Video: The first frame
         av = Play_AV()
-        video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach.mov'
+        #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach.mov'
+        video_path = 'ani01_known_approach.mov'
         audio_enable = 0
         pause = 1
         av.play_av(video_path, pause, audio_enable)
@@ -356,7 +357,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
             kor_name = C_db.search(db, "english_name", eng_name)
             # -----------------------------------------------
 
-            video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach.mov'
+            #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach.mov'
+            video_path = 'ani01_known_approach.mov'
 
             if len(kor_name) > 0:   #  MongoDB/CSV 에서 한국이름을 찾을 수 있는 경우
                 # -------------------------------
@@ -383,7 +385,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                     elif dt.seconds > 0:
                         message = message + " " + str(dt.seconds) + "초만에 오셨군요"
                         how_long = str(dt.seconds) + "초"
-                    video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach_memory.mov'
+                    #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach_memory.mov'
+                    video_path = 'ani01_known_approach_memory.mov'
                 except Exception as e:
                     pass
                 print(message)
@@ -396,6 +399,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
 
                 event_data = {'visitor_name': 'UNKNOWN'}
                 video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_unknown_approach.mov'
+                video_path = 'ani01_unknown_approach.mov'
 
             # ===============================
             # TTS
@@ -449,7 +453,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                     'stt_enable': stt_enable,
                     'ani_multiprocessing': ani_multiprocessing,
                     'ad_event': ad_event,
-                    'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Person_Place.mov',
+                    #'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Person_Place.mov',
+                    'video_path': 'ani01_Person_Place.mov',
                     'audio_enable': 0,
                     'pause': 0,
                     'video_delay': 100,
@@ -477,7 +482,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                         'stt_enable': stt_enable,
                         'ani_multiprocessing': ani_multiprocessing,
                         'ad_event': ad_event,
-                        'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_GoodBye.mov',
+                        #'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_GoodBye.mov',
+                        'video_path': 'ani01_GoodBye.mov',
                         'audio_enable': 0,
                         'pause': 0,
                         'video_delay': 100,
@@ -557,14 +563,16 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                         'stt_enable': stt_enable,
                         'ani_multiprocessing': ani_multiprocessing,
                         'ad_event': ad_event,
-                        'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
+                        #'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
+                        'video_path': 'ani01_Hi_Short.mov',
                         'audio_enable': 0,
                         'pause': 0,
                         'video_delay': 120,
                         'audio_length': len(message)
                     }
                     tts_animation(message, tts, av, web_api, gsp, obj_track, param,
-                                  BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
+                                  #BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
+                            'ani01_Hi_Short.mov')
                 # ===============================
 
                 if (u'끝내자' in content):
@@ -633,14 +641,16 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                             'stt_enable': stt_enable,
                             'ani_multiprocessing': ani_multiprocessing,
                             'ad_event': ad_event,
-                            'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
+                            #'video_path': BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov',
+                            'video_path': 'ani01_Hi_Short.mov',
                             'audio_enable': 0,
                             'pause': 0,
                             'video_delay': 150,
                             'audio_length': len(message)
                         }
                         tts_animation(message, tts, av, web_api, gsp, obj_track, param,
-                                      BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
+                                      #BASE_DIR + '/Behavior_Expression/Act_Face/ani01_Hi_Short.mov')
+                                'ani01_Hi_Short.mov')
                     # ===============================
 
                     print(json.dumps(answer, indent=4, ensure_ascii=False))
