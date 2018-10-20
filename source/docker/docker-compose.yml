@@ -1,21 +1,25 @@
 version: '3'
 
 services:
-  # Fail to load /bin/bash
-  facebot:
-    image: pristine70/python3.6_opencv
-    container_name: python3.6_opencv
+  facebot_temp:
+    build: Dockerfile-dev
+    image: temp:latest
+    container_name: facebot_temp
     ports:
-      - 60000:60000
-    environment:
-      - DISPLAY=""
-      - QT_X11_NO_MITSHM=1
-      - LIBGL_ALWAYS_INDIRECT=1
-    volumes:
-      - /home/jschoi/work:/root/work
-      - /tmp/.X11-unix:/tmp/.X11-unix
-      - /dev/video2:/dev/video0
-    command: python3 /root/work/ChatBot/FaceBot/source/main.py
+      - 27017:27017
+
+
+
+
+    #command: python3.6
+    #  - DISPLAY=""
+    #  - QT_X11_NO_MITSHM=1
+    #  - LIBGL_ALWAYS_INDIRECT=1
+    #volumes:
+    #  - /home/jschoi/work:/root/work
+    #  - /tmp/.X11-unix:/tmp/.X11-unix
+    #  - /dev/video2:/dev/video0
+    #command: python3 /root/work/ChatBot/FaceBot/source/main.py
 
 #  mongodb:
 #    image: mongo:latest

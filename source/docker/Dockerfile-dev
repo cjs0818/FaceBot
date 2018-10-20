@@ -1,0 +1,10 @@
+FROM python:3.6
+
+
+RUN     apt-get update && \
+        apt-get upgrade -y && \
+        apt-get install -y --no-install-recommends build-essential cmake git pkg-config
+
+ENTRYPOINT ["python3.6"]
+
+

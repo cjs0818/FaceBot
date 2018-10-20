@@ -56,7 +56,7 @@ xhost +
 
 $DOCKER run -it --rm \
     --env $XDISP \
-    --env="QT_X11_NO_MITSHM=1" \
+    --env "QT_X11_NO_MITSHM=1" \
     --env LIBGL_ALWAYS_INDIRECT=1 \
     --volume $XSOCK:$XSOCK:ro \
     --volume $WORKDIR:/root/work:rw \
