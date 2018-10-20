@@ -5,6 +5,11 @@ RUN     apt-get update && \
         apt-get upgrade -y && \
         apt-get install -y --no-install-recommends build-essential cmake git pkg-config
 
-ENTRYPOINT ["python3.6"]
+COPY . /app
+WORKDIR /app
 
+RUN	pip3 install -r requirements_temp.txt
+
+#ENTRYPOINT ["python3.6"]
+#CMD ["app.py"]
 

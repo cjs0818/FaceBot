@@ -1,33 +1,72 @@
 version: '3'
 
 services:
-  facebot_temp:
-    build: Dockerfile-dev
-    image: temp:latest
-    container_name: facebot_temp
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
     ports:
       - 27017:27017
+    volumes:
+      - /home/jschoi/work/ChatBot/FaceBot/source/Knowledge/Database/MongoDB:/data/db
+    network_mode: "host"
+
+#  mongodb:
+#    image: pristine70/python3.6_opencv
+#    container_name: mongodb
+#    command: ["service", "mongodb", "start"]
 
 
+#  facebot_expression:
+#    image: pristine70/python3.6_opencv
+#    container_name: expression
+#    environment:
+#      - DISPLAY
+#      - QT_X11_NO_MITSHM=1
+#      - LIBGL_ALWAYS_INDIRECT=1
+#      - PYTHONPATH=/root/work/ChatBot/FaceBot/source:$PYTHONPATH
+#    devices:
+#      - /dev/snd:/dev/snd
+#    ports:
+#      - 60000:60000
+#    volumes:
+#      - /home/jschoi/work:/root/work
+#      - /tmp/.X11-unix:/tmp/.X11-unix
+#    network_mode: "host"
+#    command: python3 /root/work/ChatBot/FaceBot/source/Behavior_Expression/Act_Face/main_server.py
+
+  facebot_perception:
+    image: pristine70/python3.6_opencv
+    container_name: perception
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_INDIRECT=1
+#      - PATH=/root/work/ChatBot/FaceBot/source/docker:$PATH
+      - PYTHONPATH=/root/work/ChatBot/FaceBot/source:$PYTHONPATH
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/snd:/dev/snd
+    ports:
+      - 60000:60000
+    volumes:
+      - /home/jschoi/work:/root/work
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: "host"
+    command: python3 /root/work/ChatBot/FaceBot/source/main.py
 
 
-    #command: python3.6
-    #  - DISPLAY=""
-    #  - QT_X11_NO_MITSHM=1
-    #  - LIBGL_ALWAYS_INDIRECT=1
+#    command: python3.6 app.py
+#    command:
+#      - cd /root/work/ChatBot/FaceBot/source
+#      - service mongodb start
+#      - python3 Behavior_Expression/Act_Face/main_server.py
+
+#      - /root/work/ChatBot/FaceBot/source/docker/./launch.sh
     #volumes:
     #  - /home/jschoi/work:/root/work
     #  - /tmp/.X11-unix:/tmp/.X11-unix
     #  - /dev/video2:/dev/video0
     #command: python3 /root/work/ChatBot/FaceBot/source/main.py
-
-#  mongodb:
-#    image: mongo:latest
-#    container_name: mongodb
-#    environment:
-#      - MONGO_DATA_DIR=/data/db
-#      - MONGO_LOG_DIR=/dev/null
-#    ports:
-#      - 27017:27017
-#    volumes:
-#      - /home/jschoi/work/ChatBot/FaceBot/source/Knowledge/Database/MongoDB:/data/db

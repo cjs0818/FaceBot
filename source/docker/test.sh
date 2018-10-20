@@ -1,1 +1,1 @@
-docker build -f Dockerfile_temp -t temp .
+docker build -f Dockerfile-dev -t temp .

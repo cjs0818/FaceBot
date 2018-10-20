@@ -13,8 +13,8 @@ GPU=0
 EN0=enp0s5
 #EN0=enp0s31f6
 
-VIDEO=/dev/video2
-#VIDEO=/dev/video0
+#VIDEO=/dev/video2
+VIDEO=/dev/video0
 
 
 #-------------
