@@ -63,11 +63,11 @@ $DOCKER run -it --rm \
     --device $VIDEO:/dev/video0 \
     --device /dev/snd:/dev/snd \
     --name $NAME_ID \
-    -p 60000:60000 \
     $IMAGE_ID \
     /bin/bash
 #export containerId=$(docker ps -l -q)
     #-p 27017:27017 \
+    #-p 60000:60000 \
 
 #xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $containerId`
 #docker start $containerId

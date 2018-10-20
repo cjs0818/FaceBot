@@ -398,7 +398,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                 print(message)
 
                 event_data = {'visitor_name': 'UNKNOWN'}
-                video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_unknown_approach.mov'
+                #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_unknown_approach.mov'
                 video_path = 'ani01_unknown_approach.mov'
 
             # ===============================
@@ -517,9 +517,9 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                     try:
                         #content = gsp._buff.get(False)
                         content = gsp.getText(block)
-                        if content is not None:
-                            print(content)
 
+                        if content is not None:
+                            print("음성인식: [" + content + "] ")
                         else:
                             # 구글 음성인식기의 경우 1분 제한을 넘으면 None 발생 -> 다시 클래스를 생성시킴
                             print("Recreate Gspeech()!")
@@ -538,6 +538,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                     else:
                         dialog_flag = False
                         #q_iter = 0
+
             # 음성인식 끝
             # ---------------------------
 
