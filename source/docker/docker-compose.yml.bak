@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+#  mongodb:
+#    image: mongo:latest
+#    container_name: mongodb
+#    environment:
+#      - MONGO_DATA_DIR=/data/db
+#      - MONGO_LOG_DIR=/dev/null
+#    ports:
+#      - 27017:27017
+#    volumes:
+#      - /home/jschoi/work/ChatBot/FaceBot/source/Knowledge/Database/MongoDB:/data/db
+  facebot:
+    image: pristine70/python3.6_opencv
+    container_name: python3.6_opencv
+#    ports:
+#      - 60000:60000
+    command: python3.6 app.py
+#      - /root/./launch.sh
+    #environment:
+    #  - DISPLAY=""
+    #  - QT_X11_NO_MITSHM=1
+    #  - LIBGL_ALWAYS_INDIRECT=1
+    #volumes:
+    #  - /home/jschoi/work:/root/work
+    #  - /tmp/.X11-unix:/tmp/.X11-unix
+    #  - /dev/video2:/dev/video0
+    #command: python3 /root/work/ChatBot/FaceBot/source/main.py
