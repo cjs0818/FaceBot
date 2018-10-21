@@ -32,3 +32,6 @@ tts.mp3
 
 # ignore large capture video file
 capture*.mov
+
+# MongoDB
+source/Knowledge/Database/MongoDB/*

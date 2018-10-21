@@ -20,8 +20,6 @@ FROM python:3.6
 # copy .bashrc from host to target /root directory
 ADD .bashrc /root
 
-# setup environment variables?
-#ENV DISPLAY :0
 
 
 RUN     apt-get update && \
@@ -30,8 +28,6 @@ RUN     apt-get update && \
 	apt-get install -y libgstreamer-plugins-base1.0-dev libdc1394-22-dev  vim && \
 	pip3 install numpy && \
 	apt-get install -y vim wget
-
-
 
 
 # pyaudio
@@ -52,6 +48,11 @@ RUN	chown -R $(whoami) ~/.config/gcloud/application_default_credentials.json
 # mongodb
 RUN	apt-get install -y mongodb
 #RUN	service mongodb start
+# setup environment variables?
+#ENV DISPLAY :0
+ENV	MONGO_DATA_DIR=/data/db
+ENV	MONGO_LOG_DIR=/dev/null
+
 
 
 
