@@ -9,16 +9,12 @@ GPU=0
 #GPU=1
 
 
-#EN0=en0
-EN0=enp0s5
-#EN0=enp0s31f6
 
 #VIDEO=/dev/video2
 VIDEO=/dev/video0
 
 
 #-------------
-DISPLAY_IP=$(ifconfig $EN0 | grep inet | awk '$1=="inet" {print $2}')
 XSOCK=/tmp/.X11-unix
 #XAUTH=/tmp/.docker.xauth
 #xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
@@ -34,6 +30,8 @@ NAME_ID=pristine70_python3.6_opencv
 if [ $OS = "OSX" ]
 then
   DOCKER=docker
+  EN0=en0
+  DISPLAY_IP=$(ifconfig $EN0 | grep inet | awk '$1=="inet" {print $2}')
   XDISP=DISPLAY=$DISPLAY_IP:0  # for OSX
   WORKDIR=/Users/jschoi/work
 else
@@ -43,6 +41,8 @@ else
   else
     DOCKER=docker
   fi
+  EN0=enp0s5
+  #EN0=enp0s31f6
   XDISP="DISPLAY"             # for Linux
   WORKDIR=/home/jschoi/work
 fi

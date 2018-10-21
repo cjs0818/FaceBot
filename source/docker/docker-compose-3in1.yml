@@ -27,7 +27,7 @@ services:
 #    ports:
 #      - 60000:60000
     volumes:
-      - /home/jschoi/work:/root/work
+      - ~/work:/root/work
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: "host"
     command: python3 /root/work/ChatBot/FaceBot/source/Behavior_Expression/Act_Face/main_server.py
