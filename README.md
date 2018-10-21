@@ -1,14 +1,67 @@
 # Face Detection, Head Pose Detection and Face Recognition with OpenCV(python)
 
-## Install Docker
-- Install docker
-  Refer to [https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository](http://https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository)
+## Install Docker (docker & docker-compose)
 
-- Install docker-compose
+### OS X
+- Install **Docker for Mac**
+  Refer to [https://docs.docker.com/docker-for-mac/install/](https://docs.docker.com/docker-for-mac/install/)
+  
+- Install **docker-compose**
+  docker-compose is included in Docker for Mac. You don't need to install docker-compose separately ([https://docs.docker.com/compose/install/#install-compose](https://docs.docker.com/compose/install/#install-compose)).
+  
+### Ubuntu
+- Install **docker**
+  Refer to [https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository](http://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository)
+
+- Install **docker-compose**
   ```
   $ sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
   $ sudo chmod +x /usr/local/bin/docker-compose
   ```
+
+## Download git source files
+- Download git source files in you work directory
+```
+$ git clone https://github.com/cjs0818/FaceBot.git
+$ cd FaceBot  # Let's say this director is BASE_DIR
+```
+
+- Set PYTHONPATH environment variable
+```
+$ export BASE_DIR=<your_work_dir>/FaceBot/source   # For me, ~/work/ChatBot/FaceBot/soure
+$ export PYTHONPATH=$BASE_DIR:$PYTHONPATH
+```
+
+
+## *FaceBot* using Docker
+
+You can execute FaceBot using docker or docker-compose
+
+### 1. docker-compose (recommended)
+- If you want launch, in the same docker container, "main_server.py" located in *$BASE_DIR/Behavior_Expression/Act_Face* folder, then
+   ```
+   $ cd docker
+   $ docker-compose -f docker-compose-3in1.yml up
+   ```
+- If you want to launch separately "main_server.py" located in *$BASE_DIR/Behavior_Expression/Act_Face* folder, then
+   ```
+   $ cd docker
+   $ python3 $BASE_DIR/Behavior_Expression/Act_Face/main_server.py &
+   $ docker-compose -f docker-compose-2in1.yml up
+   ```
+
+- When you want to stop the containers, just type Ctrl-C.
+
+### 2. docker (mongodb from docker can't be connected to host: to be solved)
+- Run **start.sh**, the docker run script file
+   ```
+   $ ./start.sh
+   ```
+- Run **launch.sh** which describes all procedures we need to start
+   ```
+   root@761e48b8cd85:~/docker# ./launch.sh
+   ```
+
 
 ## Install Python, pyenv, virtualenv
 - Install python3   (v3.6.5 is recommended, since v3.7 & above is not compatible with tensorflow yet)
@@ -67,17 +120,36 @@ $ pip3 install virtualenv virtualenvwrapper
 ```
 
 
-## Download git source files & create virtualenv
-- Download git source files in you work directory
+
+## Create virtualenv for FaceBot
+
+- Move to the BASE_DIR
 ```
-$ git clone https://github.com/cjs0818/Face_Detect.git
-$ cd Face_Detect  # Let's say this director is BASE_DIR
+$ cd $BASE_DIR
 ```
 
-- Set PYTHONPATH environment variable
+- Create virtualenv
 ```
-$ export BASE_DIR=<your_work_dir>/Face_Detect   # For me, ~/work/ChatBot/Face_Detect
-$ export PYTHONPATH=$BASE_DIR:$PYTHONPATH
+$ virtualenv -p python3 venv   # <-- virtual env -p <python version> <가상 environment name
+```
+```
+ $ virtualenv -p python3 venv   # Make sure you are using python 3.6.5
+```
+  - If you have already had venv with different version of python3 (i.e, python3.7.0), then you first need to remove the virtualenv folder (venv) and recreate a new venv with python3.6.5 
+
+
+
+- Go into the virtualenv
+```
+$ source venv/bin/activate
+```
+	- When you exit the virtualenv, just type `deactivate` in the environment.
+	```
+    $ (venv) deactivate
+    ```
+- Install the required modules which are written in `requirements.txt.` file. (**It takes some time!!!**)
+```
+$ pip3 install -r requirements.txt
 ```
 
 - Note, **tensorflow is not compatible with python3.7**.
@@ -104,30 +176,7 @@ $ export PYTHONPATH=$BASE_DIR:$PYTHONPATH
   ```
   $ ./bootstrap && make && make install
   ```
-
-- Create virtualenv
-```
-$ virtualenv -p python3 venv   # <-- virtual env -p <python version> <가상 environment name
-```
-```
- $ virtualenv -p python3 venv   # Make sure you are using python 3.6.5
-```
-  - If you have already had venv with different version of python3 (i.e, python3.7.0), then you first need to remove the virtualenv folder (venv) and recreate a new venv with python3.6.5 
-
-
-
-- Go into the virtualenv
-```
-$ source venv/bin/activate
-```
-	- When you exit the virtualenv, just type `deactivate` in the environment.
-	```
-    $ (venv) deactivate
-    ```
-- Install the required modules which are written in `requirements.txt.` file. (**It takes some time!!!**)
-```
-$ pip3 install -r requirements.txt
-```
+  
 
 ## Install OpenCV(python)
 
