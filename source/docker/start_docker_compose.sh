@@ -2,7 +2,7 @@ export FACEBOT_HOME=~/work/ChatBot/FaceBot/source
 
 #-----------------------
 # 2in1
-#python3 $FACEBOT_HOME/Behavior_Expression/Act_Face/main_server.py &
+python3 $FACEBOT_HOME/Behavior_Expression/Act_Face/main_server.py &
 docker-compose -f docker-compose-2in1.yml up
 
 #-----------------------
