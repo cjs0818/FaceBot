@@ -19,10 +19,28 @@
   $ sudo chmod +x /usr/local/bin/docker-compose
   ```
 
+### Things to do after docker install
+
+- The scripts require root or sudo privileges to run. So, for convenience, you'd better add $USER to the docker group and reboot.
+   ```
+    $ sudo groupadd docker  # Maybe already exist
+    $ sudo usermod -aG docker $USER
+    $ sudo reboot
+   ```
+
+- Configure Docker to start on boot
+  ```
+    $ sudo systemctl enable docker
+  ```
+- Sign up for Docker (https://cloud.docker.com/) and login.
+  ```
+    $ docker login
+  ```
+
 ## Download git source files
 - Download git source files in you work directory
 ```
-$ git clone https://github.com/cjs0818/FaceBot.git
+$ git clone https://github.com/cjs0818/FaceBot.git   # if you don't have git installed, then install with "sudo apt-get install git"
 $ cd FaceBot  # Let's say this director is BASE_DIR
 ```
 

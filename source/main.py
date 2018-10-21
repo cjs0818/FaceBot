@@ -19,6 +19,7 @@ import os
 import datetime
 import time
 import sys
+import select
 
 
 #-------------------------------------------------------------
@@ -309,6 +310,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
     while(True):
         # Capture frame-by-frame
         ret, frame = cap.read()
+        frame_org = frame.copy()   # copy frame for the possible saving the image
 
         '''
         while queue_from_cam.empty():
@@ -682,7 +684,26 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
             f_name = BASE_DIR + "/Behavior_Perception/Percept_Face/images/capture" + str(capture_idx) + ".png"
             print("Captured to file: {}".format(f_name))
             capture_idx += 1
-            cv2.imwrite(f_name, frame)
+            cv2.imwrite(f_name, frame_org)
+
+
+        # Non-bloking Key Input Listener
+        # https://docs.python.org/2/library/select.html
+        input = select.select([sys.stdin], [], [], 0.001)[0]
+        if input:
+            value = sys.stdin.readline().rstrip()
+
+            if (value == "q"):
+                print
+                "Exiting"
+                sys.exit(0)
+            elif (value == "c"):
+                f_name = BASE_DIR + "/Behavior_Perception/Percept_Face/images/capture" + str(capture_idx) + ".png"
+                print("Captured to file: {}".format(f_name))
+                capture_idx += 1
+                cv2.imwrite(f_name, frame_org)
+            else:
+                print ("You entered: %s" % value)
 
 
 
