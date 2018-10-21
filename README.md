@@ -62,6 +62,45 @@ You can execute FaceBot using docker or docker-compose
    root@761e48b8cd85:~/docker# ./launch.sh
    ```
 
+## Install MongoDB
+### OS X
+- Refer to [https://docs.mongodb.com/manual/tutorial/install-mongodb-enterprise-on-os-x/](https://docs.mongodb.com/manual/tutorial/install-mongodb-enterprise-on-os-x/)
+- Install
+  ```
+  $ brew install mongodb.  # Install in OSX
+  ```
+- 서비스 시작
+  ```
+  $ brew services start mongodb.  # start mongodb
+  ```
+- 서비스 중지
+  ```
+  $ brew services stop mongodb  # stop mongodb
+  ```
+- 특정 폴더의 DB로 시작
+  ```
+  $ mongod —dbpath <path to data directory>   # ./data/db
+  ```
+
+### Linux
+- Refer to [https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)
+- Install
+  ```
+  $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+  $ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+  $ sudo apt-get update
+  $ sudo apt-get install -y mongodb-org
+  $ sudo service mongod start
+  ```
+- Run MongoDB
+  ```
+  $ mongo --host 127.0.0.1:27017
+  ```
+
+### Studio 3T (MongoDB GUI client)
+- Refer to [https://robomongo.org/download](https://robomongo.org/download)
+
+
 
 ## Install Python, pyenv, virtualenv
 - Install python3   (v3.6.5 is recommended, since v3.7 & above is not compatible with tensorflow yet)
