@@ -692,10 +692,10 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         input = select.select([sys.stdin], [], [], 0.001)[0]
         if input:
             value = sys.stdin.readline().rstrip()
+            #value = sys.stdin.read(1)
 
             if (value == "q"):
-                print
-                "Exiting"
+                print ("Exiting")
                 sys.exit(0)
             elif (value == "c"):
                 f_name = BASE_DIR + "/Behavior_Perception/Percept_Face/images/capture" + str(capture_idx) + ".png"
