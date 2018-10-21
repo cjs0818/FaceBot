@@ -54,7 +54,11 @@ ENV	MONGO_DATA_DIR=/data/db
 ENV	MONGO_LOG_DIR=/dev/null
 
 
+# Audio
+#RUN	usermod -a -G audio root
 
+# For ifconfig
+RUN	apt-get install -y net-tools
 
 # generate /root/work directory
 COPY	. /root/docker

@@ -8,8 +8,8 @@ alias ll="ls -al"
 #########################
 # Docker
 export DOCKER_ID_USER="pristine70"
-DISPLAY_IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
-#xhost +$DISPLAY_IP
+DISPLAY_IP=$(ifconfig eth0 | grep inet | awk '$1=="inet" {print $2}')
+xhost +$DISPLAY_IP
 export LIBGL_ALWAYS_INDIRECT=1
 #########################
 
