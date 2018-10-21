@@ -35,7 +35,7 @@ if [ $OS = "OSX" ]
 then
   DOCKER=docker
   XDISP=DISPLAY=$DISPLAY_IP:0  # for OSX
-  WORKDIR=/Users/jschoi/work/Yolo/HRI-20069-W3
+  WORKDIR=/Users/jschoi/work
 else
   if [ $GPU = 1 ]
   then
@@ -60,14 +60,15 @@ $DOCKER run -it --rm \
     --env LIBGL_ALWAYS_INDIRECT=1 \
     --volume $XSOCK:$XSOCK:ro \
     --volume $WORKDIR:/root/work:rw \
+    --volume $WORKDIR/ChatBot/FaceBot/source/Knowledge/Database/MongoDB:/data/db \
     --device $VIDEO:/dev/video0 \
     --device /dev/snd:/dev/snd \
     --name $NAME_ID \
+    -p 60000:60000 \
+    -p 27017:27017 \
     $IMAGE_ID \
     /bin/bash
 #export containerId=$(docker ps -l -q)
-    #-p 27017:27017 \
-    #-p 60000:60000 \
 
 #xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $containerId`
 #docker start $containerId
