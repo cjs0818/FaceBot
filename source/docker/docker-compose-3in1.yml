@@ -10,7 +10,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - /home/jschoi/work/ChatBot/FaceBot/source/Knowledge/Database/MongoDB:/data/db
+      - ~/work/ChatBot/FaceBot/source/Knowledge/Database/MongoDB:/data/db
     network_mode: "host"
 
 
@@ -47,7 +47,7 @@ services:
     ports:
       - 60000:60000
     volumes:
-      - /home/jschoi/work:/root/work
+      - ~/work:/root/work
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: "host"
     command: python3 /root/work/ChatBot/FaceBot/source/main.py
