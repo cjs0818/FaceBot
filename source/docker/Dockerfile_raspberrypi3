@@ -22,7 +22,7 @@ RUN     apt-get update && \
 	pip install --upgrade pip
 RUN	pip3 install dlib
 RUN	pip3 install numpy scipy
-RUN	matplotlib scikit-learn
+RUN	pip3 install matplotlib scikit-learn
 
 # pyaudio
 RUN	apt-get install -y libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
@@ -33,7 +33,9 @@ RUN	apt-get install -y vlc
 RUN	sed -i 's/geteuid/getppid/' /usr/bin/vlc
 
 
-RUN	pip3 install Pillow tensorflow lc pymongo pprint
+RUN	pip3 install Pillow
+RUN	pip3 install tensorflow
+RUN	pip3 install lc pymongo pprint
 RUN	pip3 install google-cloud-speech==0.35.0
 RUN	pip3 install requests Flask 
 
