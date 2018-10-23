@@ -13,14 +13,14 @@ import dlib     # used for Face detectiob by Dlib
 detector = dlib.get_frontal_face_detector()
 
 
-cap = cv2.VideoCapture(0)
-cap.set(3, 320)
-cap.set(4, 240)
+#cap = cv2.VideoCapture(0)
+#cap.set(3, 320)
+#cap.set(4, 240)
 #--------------------
 # For Raspberry Pi 3
-#cap = cv2.VideoCapture(-1)
-#cap.set(3, 640)
-#cap.set(4, 480)
+cap = cv2.VideoCapture(-1)
+cap.set(3, 640)
+cap.set(4, 480)
 #--------------------
 
 

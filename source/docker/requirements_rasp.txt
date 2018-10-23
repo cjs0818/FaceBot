@@ -1,21 +1,22 @@
-Sphinx	# for documentation
-sphinx_rtd_theme
+#Sphinx	# for documentation
+#sphinx_rtd_theme
 
-dlib
 numpy
+dlib
 scipy
-matplotlib
-scikit-image
+matplotlib  # sudo apt-get install libfreetype6-dev pkg-config
 scikit-learn
+scikit-image
 
 #----------------------------
 # OpenCV
 # sudo apt install libqtgui4
 # sudo apt install libqt4-test
 # sudo apt-get install libhdf5-dev libhdf5-serial-dev
+opencv-python
 opencv-contrib-python
 
-google-cloud-vision==0.30.1
+#google-cloud-vision==0.30.1
 Pillow
 
 setuptools==39.1.0 # for tensorflow==1.9.0
