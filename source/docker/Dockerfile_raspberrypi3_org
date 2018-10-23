@@ -1,0 +1,59 @@
+#--------------------
+# For resin RaspberryPi3
+#FROM resin/raspberrypi3-python:3.6
+  # Based on resin/raspberrypi3-python:3.6 installed opencv
+FROM demosense/raspberrypi3-opencv
+#--------------------
+
+
+# generate /root/work directory
+WORKDIR /root/work
+
+# copy .bashrc from host to target /root directory
+ADD .bashrc /root
+
+# setup environment variables?
+#ENV DISPLAY :0
+
+
+#--------------------
+RUN     apt-get update && \
+        apt-get upgrade -y && \
+	apt-get install vim && \
+	pip install --upgrade pip
+RUN	pip3 install dlib
+RUN	pip3 install numpy scipy
+RUN	pip3 install matplotlib scikit-learn
+
+# pyaudio
+RUN	apt-get install -y libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
+RUN	pip3 install pyaudio
+
+# vlc
+RUN	apt-get install -y vlc 
+RUN	sed -i 's/geteuid/getppid/' /usr/bin/vlc
+
+
+RUN	pip3 install Pillow
+
+RUN	apt-get install -y libatlas-base-dev
+RUN	pip install --upgrade pip
+RUN	pip3 install --upgrade tensorflow
+#RUN	pip3 install https://github.com/lhelontra/tensorflow-on-arm/releases/download/v1.9.0/tensorflow-1.9.0-cp35-none-linux_armv7l.whl
+#RUN	pip3 install https://github.com/lhelontra/tensorflow-on-arm/releases/download/v1.9.0/tensorflow-1.9.0-cp35-none-linux_aarch64.whl
+RUN	pip3 install lc pymongo pprint
+RUN	pip3 install google-cloud-speech==0.35.0
+RUN	pip3 install requests Flask 
+
+        #pip3 install dlib numpy scipy matplotlib sckikit-image scikit-learn && \
+	#pip3 install google-cloud-vision==0.30.1 && \
+#tensorflow-1.11.0-cp35-none-linux_armv7l.whl
+
+COPY	. /root/docker
+WORKDIR	/root/docker
+
+CMD /bin/bash
+
+#RUN cd /root; git clone https://github.com/opencv/opencv; cd /root/opencv; mkdir build; cd build; cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..; make; make install
+#-----------------
+
