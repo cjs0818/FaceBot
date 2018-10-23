@@ -16,21 +16,33 @@ ADD .bashrc /root
 
 
 #--------------------
-# For OpenCV
-
 RUN     apt-get update && \
         apt-get upgrade -y && \
+	apt-get install vim && \
+	pip install --upgrade pip
+RUN	pip3 install dlib
+RUN	pip3 install numpy scipy
+RUN	matplotlib scikit-learn
 
-	pip install --upgrade pip && \
-        pip3 install dlib && \
-        pip3 install numpy scipy matplotlib scikit-learn && \
-	pip3 install Pillow tensorflow vlc pymongo pprint && \
-	pip3 install google-cloud-speech==0.35.0 && \
-	pip3 install requests Flask pic ffpyplayer
+# pyaudio
+RUN	apt-get install -y libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
+RUN	pip3 install pyaudio
+
+# vlc
+RUN	apt-get install -y vlc 
+RUN	sed -i 's/geteuid/getppid/' /usr/bin/vlc
+
+
+RUN	pip3 install Pillow tensorflow lc pymongo pprint
+RUN	pip3 install google-cloud-speech==0.35.0
+RUN	pip3 install requests Flask 
 
         #pip3 install dlib numpy scipy matplotlib sckikit-image scikit-learn && \
 	#pip3 install google-cloud-vision==0.30.1 && \
 #tensorflow-1.11.0-cp35-none-linux_armv7l.whl
+
+COPY	. /root/docker
+WORKDIR	/root/docker
 
 CMD /bin/bash
 
