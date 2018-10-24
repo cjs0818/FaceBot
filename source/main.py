@@ -732,6 +732,7 @@ if __name__ == '__main__':
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
     cam_id = 0
+    #cam_id = 'http://192.168.1.20:8160'
 
     if len(sys.argv) == 2:
        cam_id = int(sys.argv[1])
