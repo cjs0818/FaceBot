@@ -736,6 +736,9 @@ if __name__ == '__main__':
     #cam_id = 'http://192.168.1.12:8080/video'
 
     if len(sys.argv) == 2:
-       cam_id = int(sys.argv[1])
-       print("cam_id = %2d" % cam_id)
+        if len(sys.argv[1]) > 2:
+            cam_id = sys.argv[1]
+            print("cam_id = %2s" % cam_id)
+        else:
+            cam_id = int(sys.argv[1])
     main(stt_enable, tts_enable, ani_multiprocessing, cam_id)
