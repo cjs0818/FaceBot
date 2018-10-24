@@ -10,8 +10,9 @@ scikit-image
 
 #----------------------------
 # OpenCV
-# sudo apt install libqtgui4
-# sudo apt install libqt4-test
+# sudo apt install -y libatlas-base-dev gfortran
+# sudo apt install -y libqtgui4
+# sudo apt install -y libqt4-test
 # sudo apt-get install libhdf5-dev libhdf5-serial-dev
 opencv-python
 opencv-contrib-python
