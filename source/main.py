@@ -341,7 +341,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         # ----------------------------
         #   Action Event Detection: action_detection/action_detection.py
         (ad_state, ad_event) = event_detect.approach_disappear(fr_labels, fr_box, max_width_id)
-
+        #print("ad_state: %2d,  ad_event: %2d" %(ad_state, ad_event))
 
         kor_name = []
         event_name = 'UnknownApproach'
