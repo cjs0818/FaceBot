@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 
 def tracking():
-    cap = cv2.VideoCapture(0)
+    #cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture('http://192.168.1.20:8160')
     cap.set(3,640)
     cap.set(4,480)
 
