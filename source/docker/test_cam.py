@@ -9,7 +9,7 @@ def tracking():
     while True:
         ret, frame = cap.read()
         cv2.imshow('video', frame)
-        if cv2.waitKey(10) & 0xff == ord('q')
+        if cv2.waitKey(10) & 0xff == ord('q'):
             break
     cv2.destroyAllwindows()
 
