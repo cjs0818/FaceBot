@@ -733,6 +733,7 @@ if __name__ == '__main__':
 
     cam_id = 0
     #cam_id = 'http://192.168.1.20:8160'
+    #cam_id = 'http://192.168.1.12:8080/video'
 
     if len(sys.argv) == 2:
        cam_id = int(sys.argv[1])
