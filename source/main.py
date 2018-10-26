@@ -734,6 +734,7 @@ if __name__ == '__main__':
     cam_id = 0
     #cam_id = 'http://192.168.1.20:8160'
     #cam_id = 'http://192.168.1.12:8080/video'
+    cam_id = 'rtsp://192.168.1.20:8160/unicast'
 
     if len(sys.argv) == 2:
         if len(sys.argv[1]) > 2:
