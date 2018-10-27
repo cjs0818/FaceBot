@@ -732,9 +732,15 @@ if __name__ == '__main__':
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
     cam_id = 0
-    #cam_id = 'http://192.168.1.20:8160'
+
+    #-------  from raspivid + cvlc: raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
+    #cam_id = 'http://192.168.1.20:8160'	
+
+    #-------  from 스마트폰app:  'IP Webcam'
     #cam_id = 'http://192.168.1.12:8080/video'
-    cam_id = 'rtsp://192.168.1.20:8160/unicast'
+
+    #-------  from v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
+    #cam_id = 'rtsp://192.168.1.20:8160/unicast' 
 
     if len(sys.argv) == 2:
         if len(sys.argv[1]) > 2:
