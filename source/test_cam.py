@@ -10,18 +10,22 @@ def tracking():
     print(cv2.getBuildInformation())
 
 
-    #-------  from raspivid + cvlc: raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
-    cam_id = 'http://192.168.1.20:8160'
+    cam_id = 0
+
+    #-------  from raspivid + cvlc: raspivid -o - -t 0 -hf -w 640 -h 480 -fps 15 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
+    # Too slow!
+    #cam_id = 'http://192.168.25.19:8160'
 
     #-------  from 스마트폰app:  'IP Webcam'
+    # 성공! Good!
     #cam_id = 'http://192.168.1.12:8080/video'
 
     #-------  from v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
     # Too slow after face detection
     #cam_id = 'rtsp://192.168.25.19:8160/unicast'
 
-
-    #-------  command-line에서는 성공 but OpenCV에서는 실패
+    #-------  from :   raspivid -t 0 -w 640 -h 480 -fps 15 -rot 90 -hf -b 2000000 -o - | gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=1 pt=96 ! gdppay ! tcpserversink host=192.168.25.19 port=5000
+    # command-line에서는 성공 but OpenCV에서는 실패
     #cam_id = 'tcpclientsrc host=192.168.25.19 port=8160 ! gdpdepay ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false'
 
 

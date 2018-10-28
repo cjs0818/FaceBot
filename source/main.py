@@ -736,7 +736,7 @@ if __name__ == '__main__':
     cam_id = 0
 
     #-------  from raspivid + cvlc: raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
-    #cam_id = 'http://192.168.1.20:8160'	
+    #cam_id = 'http://192.168.25.19:8160'	
 
     #-------  from 스마트폰app:  'IP Webcam'
     #cam_id = 'http://192.168.1.12:8080/video'
