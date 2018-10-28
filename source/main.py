@@ -209,6 +209,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
 
 
     cap = cv2.VideoCapture(cam_id)
+    print(cap.isOpened())
+
     cap.set(3, 320)
     cap.set(4, 240)
 
@@ -740,7 +742,11 @@ if __name__ == '__main__':
     #cam_id = 'http://192.168.1.12:8080/video'
 
     #-------  from v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
-    #cam_id = 'rtsp://192.168.1.20:8160/unicast' 
+    # Too slow after face detection
+    #cam_id = 'rtsp://192.168.25.19:8160/unicast' 
+
+    # Failure:
+    #cam_id = 'rtspsrc location=rtsp://192.168.25.19:8160/unicast latency=0 ! decodebin ! autovideosink sync=false'
 
     if len(sys.argv) == 2:
         if len(sys.argv[1]) > 2:
