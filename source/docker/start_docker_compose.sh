@@ -1,3 +1,4 @@
+xhost +
 export FACEBOT_HOME=~/work/ChatBot/FaceBot/source
 
 #-----------------------
@@ -7,11 +8,11 @@ export FACEBOT_HOME=~/work/ChatBot/FaceBot/source
 
 #-----------------------
 # 3in1
-#docker-compose -f docker-compose-3in1.yml up
+docker-compose -f docker-compose-3in1.yml up
 
 #-----------------------
 # rasp
-docker-compose -f docker-compose-rasp.yml up
+#docker-compose -f docker-compose-rasp.yml up
 
 
 #sudo chown -R $USER ~/work/ChatBot/FaceBot/source/Knowledge/Database/MongoDB
