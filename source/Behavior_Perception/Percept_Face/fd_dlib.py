@@ -7,28 +7,41 @@
 
 import cv2
 import dlib     # used for Face detectiob by Dlib
+from imutils.video import VideoStream, WebcamVideoStream
+import imutils
 
 # ----------------------------
 # Face detection: by Dlib
 detector = dlib.get_frontal_face_detector()
 
 
-#cap = cv2.VideoCapture(0)
-#cap.set(3, 320)
-#cap.set(4, 240)
-#--------------------
-# For Raspberry Pi 3
-cap = cv2.VideoCapture(-1)
-cap.set(3, 640)
-cap.set(4, 480)
-#--------------------
-
+video_stream = True
+if video_stream == True:
+    # -----------------------------------------------
+    # IMPORTANT!!!!
+    # -- VideoStream: Fast enough <- using threading
+    # --    VideoStream vs. WebcamVideoStream ???
+    cap = VideoStream(src=cam_id).start()
+    frame = cap.read()
+    sample_frame = imutils.resize(frame, width=320)
+else:
+    # -----------------------------------------------
+    # -- VideoCapture: Slow
+    cap = cv2.VideoCapture(0)
+    print(cap.isOpened())
+    cap.set(3, 320)
+    cap.set(4, 240)
+    ret, sample_frame = cap.read()
 
 
 
 while(True):
     # Capture frame-by-frame
-    ret, frame = cap.read()
+    if video_stream == True:
+        frame = cap.read()
+        frame = imutils.resize(frame, width=640)
+    else:
+        ret, frame = cap.read()
     #gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 
