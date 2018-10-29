@@ -20,6 +20,8 @@ import datetime
 import time
 import sys
 import select
+from imutils.video import VideoStream, WebcamVideoStream
+import imutils
 
 
 #-------------------------------------------------------------
@@ -208,11 +210,25 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         dialog_flag = q_iter < q_length
 
 
-    cap = cv2.VideoCapture(cam_id)
-    cap.set(3, 320)
-    cap.set(4, 240)
+    video_stream = True
 
-    ret, sample_frame = cap.read()
+    if video_stream == True:
+        # -----------------------------------------------
+        # IMPORTANT!!!!
+        # -- VideoStream: Fast enough <- using threading
+        # --    VideoStream vs. WebcamVideoStream ???
+        cap = VideoStream(src=cam_id).start()
+        frame = cap.read()
+        sample_frame = imutils.resize(frame, width=320)
+    else:
+        # -----------------------------------------------
+        # -- VideoCapture: Slow
+        cap = cv2.VideoCapture(cam_id)
+        print(cap.isOpened())
+        cap.set(3, 320)
+        cap.set(4, 240)
+        ret, sample_frame = cap.read()
+
 
     '''
     cam_process = Process(target=cam_loop, args=(queue_from_cam,))
@@ -309,7 +325,13 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
 
     while(True):
         # Capture frame-by-frame
-        ret, frame = cap.read()
+        if video_stream == True:
+            frame = cap.read()
+            frame = imutils.resize(frame, width=640)
+        else:
+            ret, frame = cap.read()
+
+
         frame_org = frame.copy()   # copy frame for the possible saving the image
 
         '''
@@ -341,7 +363,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         # ----------------------------
         #   Action Event Detection: action_detection/action_detection.py
         (ad_state, ad_event) = event_detect.approach_disappear(fr_labels, fr_box, max_width_id)
-
+        #print("ad_state: %2d,  ad_event: %2d" %(ad_state, ad_event))
 
         kor_name = []
         event_name = 'UnknownApproach'
@@ -733,7 +755,23 @@ if __name__ == '__main__':
 
     cam_id = 0
 
+    #-------  from raspivid + cvlc: raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
+    #cam_id = 'http://192.168.25.19:8160'
+
+    #-------  from 스마트폰app:  'IP Webcam'
+    #cam_id = 'http://192.168.1.12:8080/video'
+
+    #-------  from v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
+    # Too slow after face detection
+    cam_id = 'rtsp://192.168.25.19:8160/unicast'
+
+    # Failure:
+    #cam_id = 'rtspsrc location=rtsp://192.168.25.19:8160/unicast latency=0 ! decodebin ! autovideosink sync=false'
+
     if len(sys.argv) == 2:
-       cam_id = int(sys.argv[1])
-       print("cam_id = %2d" % cam_id)
+        if len(sys.argv[1]) > 2:
+            cam_id = sys.argv[1]
+            print("cam_id = %2s" % cam_id)
+        else:
+            cam_id = int(sys.argv[1])
     main(stt_enable, tts_enable, ani_multiprocessing, cam_id)
