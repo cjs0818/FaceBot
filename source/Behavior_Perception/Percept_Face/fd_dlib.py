@@ -15,6 +15,8 @@ import imutils
 detector = dlib.get_frontal_face_detector()
 
 
+cam_id = 0
+
 video_stream = True
 if video_stream == True:
     # -----------------------------------------------
@@ -27,7 +29,7 @@ if video_stream == True:
 else:
     # -----------------------------------------------
     # -- VideoCapture: Slow
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(cam_id)
     print(cap.isOpened())
     cap.set(3, 320)
     cap.set(4, 240)
