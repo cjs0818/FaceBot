@@ -17,7 +17,3 @@ def tracking():
 
 if __name__ == '__main__':
     tracking()
-<<<<<<< HEAD
-
-=======
->>>>>>> 5618cc74bd06b82dbf200f043ccdb53b9a7a7263
