@@ -178,7 +178,8 @@ class FaceRecog():
         fr_labels = []
         fr_box = []
         fr_min_dist = []
-        elected_label = None
+        selected_label = None
+
 
         for k, d in enumerate(dets):
             #print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
@@ -232,6 +233,8 @@ class FaceRecog():
                 fr_labels.append(selected_label)
                 fr_box.append(d)
                 fr_min_dist.append(min_dist)
+                
+
 
         return(fr_labels, fr_box, fr_min_dist)
 
@@ -250,6 +253,7 @@ class FaceRecog():
                 if len(fr_labels) > 0 and fr_labels[max_width_id] == "unknown_far":
                     event_detect.reset()
 
+        fr_min_dist = -1
 
         # --------------------------------------
         # Object Tracking for undetected face

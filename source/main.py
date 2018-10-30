@@ -358,7 +358,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
             #  To find kor_name from eng_name using MongoDB or csv file
             #kor_name = mgdb.search("english_name", eng_name)
             kor_name = C_db.search(db, "english_name", eng_name)
-            print("Searching kor_name completed from csv") 
+            print("Searching kor_name completed from csv")
             # -----------------------------------------------
 
             #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach.mov'
@@ -615,7 +615,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                             message = person_to_visit + "님은 " + room_num + "호 에 계시며, 자세한 정보는 다음과 같습니다."
                         except:
                             message = person_to_visit + "님의 정보는 다음과 같습니다."
-                        
+
                         #info = {
                         #    "name": "최종석",
                         #    "information": {
@@ -625,7 +625,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                         #        "e-mail": "cjs@kist.re.kr"
                         #    }
                         #}
-                        
+
                         # print('   information about ', name, ': ', json.dumps(info, indent=4, ensure_ascii=False))
 
 
@@ -733,8 +733,8 @@ if __name__ == '__main__':
 
     cam_id = 0
     #cam_id = 'http://192.168.1.20:8160'
-    #cam_id = 'http://192.168.1.12:8080/video'
-    cam_id = 'rtsp://192.168.1.20:8160/unicast'
+    cam_id = 'http://192.168.1.12:8080/video'   # from 스마트폰 IP Webcam
+    #cam_id = 'rtsp://192.168.1.20:8160/unicast'  # from 라즈베리파이 h264_v4l2_rtspserver
 
     if len(sys.argv) == 2:
         if len(sys.argv[1]) > 2:
