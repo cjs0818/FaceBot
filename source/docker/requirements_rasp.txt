@@ -1,0 +1,48 @@
+#Sphinx	# for documentation
+#sphinx_rtd_theme
+
+numpy
+dlib
+scipy
+matplotlib  # sudo apt-get install libfreetype6-dev pkg-config
+scikit-learn
+scikit-image
+
+#----------------------------
+# OpenCV
+# sudo apt install -y libatlas-base-dev gfortran
+# sudo apt install -y libqtgui4
+# sudo apt install -y libqt4-test
+# sudo apt-get install libhdf5-dev libhdf5-serial-dev
+opencv-python
+opencv-contrib-python
+
+#google-cloud-vision==0.30.1
+Pillow
+
+setuptools==39.1.0 # for tensorflow==1.9.0
+tensorflow==1.9.0  # python3.6.5 호환성문제시 -> (https://github.com/lakshayg/tensorflow-build)
+
+#sudo apt-get install vlc
+
+#vlc
+pyaudio   # <-  sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
+#pyobjc		# for OSX
+#playsound	# for OSX
+pymongo
+pprint
+google-cloud-speech==0.35.0	# Google Speech
+requests			# ChatBot
+Flask		# web server
+
+#pic		# for ffpyplayer for RaspberryPi
+#ffpyplayer	# To play video file (MediaPlayer)
+
+#Python-vlc	# To play video file
+
+#glib
+#dbus-python
+#omxplayer	# To play video file → failed
+
+#pyglet		# AVBin required: [OSX] http://avbin.github.io/AVbin/Download.html, [Linux] sudo apt-get install libavbin-dev libavbin0
+#Pillow==5.0.0

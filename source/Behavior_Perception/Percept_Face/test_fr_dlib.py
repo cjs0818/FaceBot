@@ -41,7 +41,7 @@ face_descriptor_p = []
 
 
 
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)
 cap.set(3, 320)
 cap.set(4, 240)
 

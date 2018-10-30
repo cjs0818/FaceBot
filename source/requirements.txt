@@ -1,6 +1,7 @@
 Sphinx	# for documentation
 sphinx_rtd_theme
 
+imutils
 dlib
 numpy
 scipy

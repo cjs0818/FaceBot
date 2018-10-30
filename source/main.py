@@ -20,6 +20,8 @@ import datetime
 import time
 import sys
 import select
+from imutils.video import VideoStream, WebcamVideoStream
+import imutils
 
 
 #-------------------------------------------------------------
@@ -208,11 +210,25 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         dialog_flag = q_iter < q_length
 
 
-    cap = cv2.VideoCapture(cam_id)
-    cap.set(3, 320)
-    cap.set(4, 240)
+    video_stream = True
 
-    ret, sample_frame = cap.read()
+    if video_stream == True:
+        # -----------------------------------------------
+        # IMPORTANT!!!!
+        # -- VideoStream: Fast enough <- using threading
+        # --    VideoStream vs. WebcamVideoStream ???
+        cap = VideoStream(src=cam_id).start()
+        frame = cap.read()
+        sample_frame = imutils.resize(frame, width=320)
+    else:
+        # -----------------------------------------------
+        # -- VideoCapture: Slow
+        cap = cv2.VideoCapture(cam_id)
+        print(cap.isOpened())
+        cap.set(3, 320)
+        cap.set(4, 240)
+        ret, sample_frame = cap.read()
+
 
     '''
     cam_process = Process(target=cam_loop, args=(queue_from_cam,))
@@ -309,7 +325,13 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
 
     while(True):
         # Capture frame-by-frame
-        ret, frame = cap.read()
+        if video_stream == True:
+            frame = cap.read()
+            frame = imutils.resize(frame, width=640)
+        else:
+            ret, frame = cap.read()
+
+
         frame_org = frame.copy()   # copy frame for the possible saving the image
 
         '''
@@ -732,9 +754,25 @@ if __name__ == '__main__':
     ani_multiprocessing = 1   # 먼저 ./animation 폴더에서  python3 main_server.py 실행시킬 것
 
     cam_id = 0
-    #cam_id = 'http://192.168.1.20:8160'
-    cam_id = 'http://192.168.1.12:8080/video'   # from 스마트폰 IP Webcam
-    #cam_id = 'rtsp://192.168.1.20:8160/unicast'  # from 라즈베리파이 h264_v4l2_rtspserver
+
+    '''
+    #-------  from raspivid + cvlc: raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
+    #cam_id = 'http://192.168.25.19:8160'
+
+    #-------  from 스마트폰 app:  'IP Webcam'
+    #cam_id = 'http://192.168.1.12:8080/video'
+    
+        # Failure:
+    #cam_id = 'rtspsrc location=rtsp://192.168.25.19:8160/unicast latency=0 ! decodebin ! autovideosink sync=false'
+    '''
+
+    # -----------------------------------------------------------
+    #-------  from 라즈베리파이 v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
+    # GOOD!!!! using imutils.video.VideoStream <- Too slow after face detection
+    cam_id = 'rtsp://192.168.25.19:8160/unicast'
+    cam_id = 'rtsp://192.168.1.20:8160/unicast'
+
+
 
     if len(sys.argv) == 2:
         if len(sys.argv[1]) > 2:
