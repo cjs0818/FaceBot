@@ -3,8 +3,9 @@ import numpy as np
 
 def tracking():
     #cap = cv2.VideoCapture(0)
+    #cap = cv2.VideoCapture(1)
     #cap = cv2.VideoCapture('http://192.168.1.20:8160')
-    cap = cv2.VideoCapture('rtsp://192.168.1.20:8160/unicast')
+    cap = cv2.VideoCapture('rtsp://192.168.25.19:8160/unicast')
     cap.set(3,640)
     cap.set(4,480)
 
