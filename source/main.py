@@ -769,7 +769,8 @@ if __name__ == '__main__':
     # -----------------------------------------------------------
     #-------  from v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
     # GOOD!!!! using imutils.video.VideoStream <- Too slow after face detection
-    cam_id = 'rtsp://192.168.25.19:8160/unicast'
+    #cam_id = 'rtsp://192.168.25.19:8160/unicast'
+    cam_id = 'http://192.168.25.19:5000/video_feed'
 
 
     if len(sys.argv) == 2:
