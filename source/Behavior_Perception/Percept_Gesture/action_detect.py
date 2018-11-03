@@ -20,7 +20,7 @@ class Event_Detector():
         self.approach_cnt = 0
         self.approach_cnt_th = 5
         self.disappear_cnt = 0
-        self.disappear_cnt_th = 10
+        self.disappear_cnt_th = 20
         self.event_label = []
 
         self.id = -1
@@ -32,7 +32,7 @@ class Event_Detector():
         self.approach_cnt = 0
         self.approach_cnt_th = 5
         self.disappear_cnt = 0
-        self.disappear_cnt_th = 10
+        self.disappear_cnt_th = 20
         self.event_label = []
 
 

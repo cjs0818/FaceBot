@@ -2,8 +2,12 @@
 # you should do the following first in the other terminal
 # socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"
 
-#OS=OSX
-OS=Linux
+if [ $(uname) = "Darwin" ]
+then
+   OS=OSX
+else
+   OS=Linux
+fi
 
 GPU=0
 #GPU=1
