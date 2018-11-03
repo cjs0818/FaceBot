@@ -380,7 +380,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
             #  To find kor_name from eng_name using MongoDB or csv file
             #kor_name = mgdb.search("english_name", eng_name)
             kor_name = C_db.search(db, "english_name", eng_name)
-            print("Searching kor_name completed from csv") 
+            print("Searching kor_name completed from csv")
             # -----------------------------------------------
 
             #video_path = BASE_DIR + '/Behavior_Expression/Act_Face/ani01_known_approach.mov'
@@ -637,7 +637,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                             message = person_to_visit + "님은 " + room_num + "호 에 계시며, 자세한 정보는 다음과 같습니다."
                         except:
                             message = person_to_visit + "님의 정보는 다음과 같습니다."
-                        
+
                         #info = {
                         #    "name": "최종석",
                         #    "information": {
@@ -647,7 +647,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                         #        "e-mail": "cjs@kist.re.kr"
                         #    }
                         #}
-                        
+
                         # print('   information about ', name, ': ', json.dumps(info, indent=4, ensure_ascii=False))
 
 
@@ -759,7 +759,7 @@ if __name__ == '__main__':
     #-------  from raspivid + cvlc: raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
     #cam_id = 'http://192.168.25.19:8160'
 
-    #-------  from 스마트폰app:  'IP Webcam'
+    #-------  from 스마트폰 app:  'IP Webcam'
     #cam_id = 'http://192.168.1.12:8080/video'
     
         # Failure:
@@ -767,10 +767,11 @@ if __name__ == '__main__':
     '''
 
     # -----------------------------------------------------------
-    #-------  from v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
+    #-------  from 라즈베리파이 v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
     # GOOD!!!! using imutils.video.VideoStream <- Too slow after face detection
-    #cam_id = 'rtsp://192.168.25.19:8160/unicast'
-    cam_id = 'http://192.168.25.19:5000/video_feed'
+    #cam_id = 'http://192.168.25.19:5000/video_feed'
+    #cam_id = 'rtsp://192.168.1.20:8160/unicast'  # office
+    cam_id = 'rtsp://192.168.25.19:8160/unicast'  # home
 
 
     if len(sys.argv) == 2:
