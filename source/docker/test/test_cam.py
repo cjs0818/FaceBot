@@ -6,7 +6,8 @@ import imutils
 def tracking():
 
     cam_id = 0
-    cam_id = "http://localhost:8082"
+    #cam_id = "http://localhost:8082"
+    #cam_id = "http://192.168.25.16:8160"
 
     video_stream = True
     if video_stream == True:
