@@ -58,7 +58,21 @@ fi
 #xhost + $DISPLAY_IP
 xhost +
 
-$DOCKER run -it --rm \
+if [ $OS = "OSX" ]
+  $DOCKER run -it --rm \
+    --env $XDISP \
+    --env "QT_X11_NO_MITSHM=1" \
+    --env LIBGL_ALWAYS_INDIRECT=1 \
+    --volume $XSOCK:$XSOCK:ro \
+    --volume $WORKDIR:/root/work:rw \
+    --volume $WORKDIR/ChatBot/FaceBot/source/Knowledge/Database/MongoDB:/data/db \
+    --name $NAME_ID \
+    -p 27017:27017 \
+    $IMAGE_ID \
+    /bin/bash
+    #-p 60000:60000 \
+then
+  $DOCKER run -it --rm \
     --env $XDISP \
     --env "QT_X11_NO_MITSHM=1" \
     --env LIBGL_ALWAYS_INDIRECT=1 \
@@ -72,6 +86,8 @@ $DOCKER run -it --rm \
     -p 27017:27017 \
     $IMAGE_ID \
     /bin/bash
+fi
+
 #export containerId=$(docker ps -l -q)
 
 #xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $containerId`
