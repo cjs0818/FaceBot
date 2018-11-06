@@ -47,7 +47,9 @@ export PYTHONPATH=~/work/ChatBot/FaceBot/source:$PYTHONPATH
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES 
 
 #-----------------------
-# easy cd
-export FACEBOT_HOME=~/work/ChatBot/FaceBot/source
+# FACEBOT
+export FACEBOT_HOME="~/work/ChatBot/FaceBot/source"
 alias facebot="cd $FACEBOT_HOME"
+alias facebot1="cd $FACEBOT_HOME; venv; cd $FACEBOT_HOME/Behavior_Expression/Act_Face; python3 main_server.py"
+alias facebot2="cd $FACEBOT_HOME; venv; python3 main.py 0"
 

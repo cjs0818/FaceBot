@@ -30,8 +30,9 @@ echo "My IP Addr is $MY_IP"
 #raspivid -t 0 -w 640 -h 480 -fps 15 -rot 90 -hf -b 2000000 -o - | gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=1 pt=96 ! gdppay ! tcpserversink host=$MY_IP port=5000
 
 # Linux/OSX (Sender)
-gst-launch-1.0 autovideosrc ! video/x-raw, width=640, height=480 ! gdppay ! tcpserversink host=$MY_IP port=8160
 #gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=1 pt=96 ! autovideosrc ! video/x-raw, width=640, height=480 ! gdppay ! tcpserversink host=$MY_IP port=8160
+gst-launch-1.0 autovideosrc ! video/x-raw, width=640, height=480 ! gdppay ! tcpserversink host=$MY_IP port=8160
+#gst-launch-1.0 autovideosrc latency=0 ! decodebin ! tcpserversink host=$MY_IP port=8160
 
 # Linux/OSX (Receiver)
 #gst-launch-1.0 -v tcpclientsrc host=$MY_IP port=8160 ! gdpdepay ! rtph264depay ! avdec_h264 ! videoconvert ! autovideosink sync=false

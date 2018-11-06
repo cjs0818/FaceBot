@@ -53,6 +53,8 @@ RUN	apt-get install -y mongodb
 ENV	MONGO_DATA_DIR=/data/db
 ENV	MONGO_LOG_DIR=/dev/null
 
+# gstreamer
+RUN	apt-get install -y gstreamer1.0 gstreamer1.0-tools
 
 # Audio
 #RUN	usermod -a -G audio root
