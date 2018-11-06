@@ -33,6 +33,7 @@ if [ -f '~/work/GoogleCloudSDK/google-cloud-sdk/completion.bash.inc' ]; then sou
 #export PYENV_ROOT="$HOME/.pyenv"
 #export PATH="$PYENV_ROOT/bin:$PATH"
 #eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
 
 #alias venv="source venv/bin/activate"
 #----------------------------
