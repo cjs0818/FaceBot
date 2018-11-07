@@ -46,9 +46,12 @@ RUN	export GOOGLE_APPLICATION_CREDENTIALS=~/.config/gcloud/application_default_c
 RUN	chown -R $(whoami) ~/.config/gcloud/application_default_credentials.json
 
 # mongodb
+RUN	apt-get install -y apt-transport-https
+RUN	apt-get install libcurl3 openssl
+RUN	echo "deb http://ftp.debian.org/debian jessie-backports main" | tee /etc/apt/sources.list.d/jessie-backports.list
 RUN	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
 RUN	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.0.list
-RUN	apt-get update &&\
+RUN	apt-get update && \
 	apt-get install -y mongodb-org
 
 ENV	MONGO_DATA_DIR=/data/db
