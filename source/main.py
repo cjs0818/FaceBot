@@ -434,6 +434,10 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
             # ===============================
             # TTS
             if tts_enable == 1:
+                try:
+                    gsp.getText(False)   # 쓰레기 음성인식 날려버림
+                except:
+                    pass
                 param = {
                     'tts_enable': tts_enable,
                     'stt_enable': stt_enable,
@@ -696,7 +700,6 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
             # --------------------------------------
         # 음성 상호작용 끝
         # ----------------------------------------
-
 
 
         #key_in = cv2.waitKey(20) & 0xFF
