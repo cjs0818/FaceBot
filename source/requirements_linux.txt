@@ -22,10 +22,9 @@ Pillow
 setuptools==39.1.0 # for tensorflow==1.9.0
 tensorflow==1.9.0  # python3.6.5 호환성문제시 -> (https://github.com/lakshayg/tensorflow-build)
 
-#sudo apt-get install vlc
 
 #vlc
-pyaudio   # <-  sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
+pyaudio   # <-  sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0 vlc
 #pyobjc		# for OSX
 #playsound	# for OSX
 pymongo
