@@ -60,6 +60,6 @@ alias facebot2="cd $FACEBOT_HOME; venv; python3 main.py 0"
 export MONGO_DATA_DIR=$FACEBOT_HOME/Knowledge/Database/MongoDB
 export MONGO_LOG_DIR=/dev/null
 
-alias facebot3="mongod --dbpath $MONGO_DATA_DIR"
+alias facebot0="mongod --dbpath $MONGO_DATA_DIR"
 
 
