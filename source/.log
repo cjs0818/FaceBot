@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ -z `pgrep mongod` ]
+  then
+    cd $FACEBOT_HOME_ABS/; ./start_mongodb.sh; ./start_facebot.sh
+fi
