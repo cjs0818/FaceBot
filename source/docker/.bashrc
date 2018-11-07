@@ -62,4 +62,11 @@ export MONGO_LOG_DIR=/dev/null
 
 alias facebot0="mongod --dbpath $MONGO_DATA_DIR"
 
+#-----------------------
+# Launch once facebot0, 1, 2
+export FACEBOT_HOME_ABS="/home/jschoi/work/ChatBot/FaceBot/source"
+if [ -f $FACEBOT_HOME_ABS/.log ]
+  then
+    bash $FACEBOT_HOME_ABS/.log
+fi
 
