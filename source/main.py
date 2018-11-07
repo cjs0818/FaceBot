@@ -189,6 +189,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         dialog_flag = True  # Enable speech recognition when APPROACH, Disable when dialog ends
         gsp = Gspeech()
     else:
+        gsp = Gspeech()
         # 음성인식 아닌 경우, 테스트 query에 대해 문장 단위로 테스트
         query = [
             "최종석 박사님 계신 곳이 어디에요?",
@@ -211,6 +212,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
 
 
     video_stream = True
+    #video_stream = False
 
     if video_stream == True:
         # -----------------------------------------------
