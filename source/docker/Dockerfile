@@ -58,6 +58,8 @@ ENV	MONGO_LOG_DIR=/dev/null
 # setup environment variables?
 #ENV DISPLAY :0
 
+# gstreamer
+RUN	apt-get install -y gstreamer1.0 gstreamer1.0-tools
 
 # Audio
 #RUN	usermod -a -G audio root

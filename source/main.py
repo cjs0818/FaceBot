@@ -189,6 +189,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         dialog_flag = True  # Enable speech recognition when APPROACH, Disable when dialog ends
         gsp = Gspeech()
     else:
+        gsp = Gspeech()
         # 음성인식 아닌 경우, 테스트 query에 대해 문장 단위로 테스트
         query = [
             "최종석 박사님 계신 곳이 어디에요?",
@@ -211,6 +212,7 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
 
 
     video_stream = True
+    #video_stream = False
 
     if video_stream == True:
         # -----------------------------------------------
@@ -769,9 +771,9 @@ if __name__ == '__main__':
     # -----------------------------------------------------------
     #-------  from 라즈베리파이 v4l2-rtsp server: ./h264_v4l2_rtspserver -F 25 -W 1280 -H 720 -P 8555 /dev/video0
     # GOOD!!!! using imutils.video.VideoStream <- Too slow after face detection
-    cam_id = 'rtsp://192.168.25.19:8160/unicast'
-    cam_id = 'rtsp://192.168.1.20:8160/unicast'
-
+    #cam_id = 'http://192.168.25.19:5000/video_feed'
+    #cam_id = 'rtsp://192.168.1.20:8160/unicast'  # office
+    cam_id = 'rtsp://192.168.25.19:8160/unicast'  # home
 
 
     if len(sys.argv) == 2:

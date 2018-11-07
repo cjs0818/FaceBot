@@ -50,4 +50,4 @@ services:
       - ~/work:/root/work
       - /tmp/.X11-unix:/tmp/.X11-unix
     network_mode: "host"
-    command: python3 /root/work/ChatBot/FaceBot/source/main.py
+    command: python3 /root/work/ChatBot/FaceBot/source/main.py 0

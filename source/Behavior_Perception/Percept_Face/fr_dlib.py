@@ -247,7 +247,7 @@ class FaceRecog():
         max_width_id = self.max_width_id
         fr_box = self.fr_box
 
-        if iter % 100 == 0:
+        if iter % 500 == 0:
             obj_track.track_started = False
             if obj_track.track_started == True:
                 if len(fr_labels) > 0 and fr_labels[max_width_id] == "unknown_far":
