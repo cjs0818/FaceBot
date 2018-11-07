@@ -722,10 +722,14 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
                 print ("Exiting")
                 sys.exit(0)
             elif (value == "c"):
+                # Capture Image from Camera
                 f_name = BASE_DIR + "/Behavior_Perception/Percept_Face/images/capture" + str(capture_idx) + ".png"
                 print("Captured to file: {}".format(f_name))
                 capture_idx += 1
                 cv2.imwrite(f_name, frame_org)
+            elif (value == "s"):
+                # Recalculate the face_descriptor
+                (fr.label_ids, fr.fd_known) = fr.save_registered_face()
             else:
                 print ("You entered: %s" % value)
 
