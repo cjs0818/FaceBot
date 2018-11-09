@@ -175,6 +175,12 @@ class FaceRecog():
         #print("Number of faces detected: {}".format(len(dets)))
         # ---------------------------------
 
+        # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        faceCascade = cv2.CascadeClassifier(BASE_DIR + 'haarcascades/haarcascade_frontalface_default.xml')
+        smileCascade = cv2.CascadeClassifier(BASE_DIR + 'haarcascades//haarcascade_smile.xml')
+        
+
         fr_labels = []
         fr_box = []
         fr_min_dist = []
