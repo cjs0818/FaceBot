@@ -165,31 +165,46 @@ class FaceRecog():
 
 
     def face_recognition(self, frame):
-        # ---------------------------------
-        # Face Detection
-
-        # Ask the detector to find the bounding boxes of each face. The 1 in the
-        # second argument indicates that we should upsample the image 1 time. This
-        # will make everything bigger and allow us to detect more faces.
-        dets = self.detector(frame, 1)
-        #print("Number of faces detected: {}".format(len(dets)))
-        # ---------------------------------
-
-        # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
-        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-        faceCascade = cv2.CascadeClassifier(BASE_DIR + 'haarcascades/haarcascade_frontalface_default.xml')
-        smileCascade = cv2.CascadeClassifier(BASE_DIR + 'haarcascades//haarcascade_smile.xml')
-        
 
         fr_labels = []
         fr_box = []
         fr_min_dist = []
         selected_label = None
 
+        '''
+        # multiple cascades: https://github.com/Itseez/opencv/tree/master/data/haarcascades
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        faceCascade = cv2.CascadeClassifier(BASE_DIR + '/haarcascades/haarcascade_frontalface_default.xml')
+        smileCascade = cv2.CascadeClassifier(BASE_DIR + '/haarcascades//haarcascade_smile.xml')
+
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = faceCascade.detectMultiScale(
+            gray,
+            scaleFactor=1.3,
+            minNeighbors=5,
+            minSize=(30, 30)
+        )
+        print("# of faces detected: {}".format(len(faces)))
+
+        for (x,y,w,h) in faces:
+
+        '''
+
+        # ---------------------------------
+        # Face Detection
+
+        # Ask the detector to find the bounding boxes of each face. The 1 in the
+        # second argument indicates that we should upsample the image 1 time. This
+        # will make everything bigger and allow us to detect more faces.
+        dets = self.detector(frame, 0)  # <- Too slow when enlarging the frams w/ 1, So keep using 0
+        #print("Number of faces detected: {}".format(len(dets)))
+        # ---------------------------------
+
 
         for k, d in enumerate(dets):
             #print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
             #    k, d.left(), d.top(), d.right(), d.bottom()))
+
 
             # Draw ROI box for each face found by face detection
             color = (255, 0, 0)  # BGR 0-255
