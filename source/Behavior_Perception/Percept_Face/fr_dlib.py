@@ -107,7 +107,7 @@ class FaceRecog():
                         # Ask the detector to find the bounding boxes of each face. The 1 in the
                         # second argument indicates that we should upsample the image 1 time. This
                         # will make everything bigger and allow us to detect more faces.
-                        dets = self.detector(frame, 1)
+                        dets = self.detector(frame, 0)  # <- Too slow when enlarging the frams w/ 1, So keep using 0
                         print("Number of faces detected: {}".format(len(dets)))
 
                         kd_loop_cnt = 0
