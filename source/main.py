@@ -211,8 +211,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         dialog_flag = q_iter < q_length
 
 
-    video_stream = True
-    #video_stream = False
+    #video_stream = True
+    video_stream = False
 
     if video_stream == True:
         # -----------------------------------------------
