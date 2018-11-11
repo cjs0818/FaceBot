@@ -134,6 +134,7 @@ You can execute FaceBot using docker or docker-compose
 	$ brew install readline xz
     
     $ brew install pyenv
+    	$ brew install pyenv-virtualenv
 	$ brew upgrade pyenv  # It may generate some error message like "pyenv 1.2.7 already installed", but you can neglect it.
 	```
     - In Linux,
