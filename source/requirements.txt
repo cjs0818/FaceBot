@@ -15,7 +15,7 @@ tensorflow==1.9.0  # python3.6.5 호환성문제시 -> (https://github.com/laksh
 
 #sudo apt-get install vlc
 
-pyaudio
+pyaudio   # brew install portaudio cmake
 pyobjc		# for OSX
 playsound	# for OSX
 pymongo
