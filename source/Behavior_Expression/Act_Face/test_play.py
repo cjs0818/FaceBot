@@ -1,9 +1,11 @@
 import numpy as np
 import cv2
 
-#cap = cv2.VideoCapture('ani01_Idle.mov')
-cap = cv2.VideoCapture('https://ganbjheo.p72.rt3.io')
-cv2.namedWindow('Video Play',cv2.WINDOW_AUTOSIZE)
+cap = cv2.VideoCapture('ani01_Idle.mov')
+#cap = cv2.VideoCapture('https://ganbjheo.p72.rt3.io')
+
+winname = 'Video Play'
+cv2.namedWindow(winname,cv2.WINDOW_AUTOSIZE)
 
 while(cap.isOpened()):
     ret, frame = cap.read()
@@ -12,7 +14,7 @@ while(cap.isOpened()):
 
     #cv2.imshow('frame',gray)
     try:
-        cv2.imshow('frame',frame)
+        cv2.imshow(winname,frame)
     except:
         pass
 
