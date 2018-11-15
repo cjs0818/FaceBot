@@ -42,6 +42,7 @@ class Play_AV():
         print(video_path)
 
         self.video = cv2.VideoCapture(video_path)
+
         grabbed, play_frame = self.video.read()
 
         cv2.namedWindow(winname)
@@ -51,6 +52,19 @@ class Play_AV():
         # ------------------------------
         #   Skip the first frame
         grabbed, play_frame = self.video.read()
+
+
+        # Resize the image
+        # we need to keep in mind aspect ratio so the image does
+        # not look skewed or distorted -- therefore, we calculate
+        # the ratio of the new image to the old image
+        new_width = 800     # <-  1280
+        new_height = int((new_width * play_frame.shape[0]) / play_frame.shape[1])
+        self.dim = (new_width, new_height)
+        # perform the actual resizing of the image and show it
+        play_frame = cv2.resize(play_frame, self.dim, interpolation=cv2.INTER_AREA)
+
+
         cv2.imshow(winname, play_frame)
         # ------------------------------
 
@@ -62,12 +76,16 @@ class Play_AV():
         try:
             video = self.video
             grabbed, play_frame = video.read()
+
+            play_frame = cv2.resize(play_frame, self.dim, interpolation=cv2.INTER_AREA)
             cv2.imshow(winname, play_frame)
         except:     # When reaaching the end of the idle_video_file
             self.video = cv2.VideoCapture(self.idle_video_path)
             video = self.video
             grabbed, play_frame = video.read()
             grabbed, play_frame = video.read()
+
+            play_frame = cv2.resize(play_frame, self.dim, interpolation=cv2.INTER_AREA)
             cv2.imshow(winname, play_frame)
             #print("Read Idle Video File Expired!")
             pass
@@ -81,6 +99,7 @@ class Play_AV():
 
         self.video.release
         self.video = cv2.VideoCapture(video_path)
+
         video = self.video
         winname = self.winname
 
@@ -88,6 +107,8 @@ class Play_AV():
         if (pause == 1):
             winname = self.winname
             grabbed, play_frame = video.read()
+
+            play_frame = cv2.resize(play_frame, self.dim, interpolation=cv2.INTER_AREA)
             cv2.imshow(winname, play_frame)
         else:
             #if(audio_enable == 1):
@@ -109,6 +130,8 @@ class Play_AV():
                     key_in = cv2.waitKey(video_delay) & 0xFF
                     if key_in == ord("q"):
                         return key_in
+
+                    play_frame = cv2.resize(play_frame, self.dim, interpolation=cv2.INTER_AREA)
                     cv2.imshow(winname, play_frame)
                     #if (audio_enable == 1):
                     #    if val != 'eof' and audio_frame is not None:
