@@ -10,6 +10,28 @@ import dlib     # used for Face detectiob by Dlib
 from imutils.video import VideoStream, WebcamVideoStream
 import imutils
 
+import time
+prevTime = 0
+
+def check_fps():
+    global prevTime
+
+    #현재 시간 가져오기 (초단위로 가져옴)
+    curTime = time.time()
+
+    #현재 시간에서 이전 시간을 빼면?
+    #한번 돌아온 시간!!
+    sec = curTime - prevTime
+    #이전 시간을 현재시간으로 다시 저장시킴
+    prevTime = curTime
+
+    # 프레임 계산 한바퀴 돌아온 시간을 1초로 나누면 된다.
+    # 1 / time per frame
+    fps = 1/(sec)
+
+    return fps
+
+
 # ----------------------------
 # Face detection: by Dlib
 detector = dlib.get_frontal_face_detector()
@@ -72,6 +94,7 @@ while(True):
 
 
     # Display the resulting frame
+    cv2.putText(frame, "fps: {:.2f}".format(check_fps()), (10,130), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200,30,20), 2)
     cv2.imshow('frame',frame)
 
 

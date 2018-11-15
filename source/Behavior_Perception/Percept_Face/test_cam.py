@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import time
+
 from imutils.video import VideoStream
 import imutils
 import cv2
+
+import time
 
 prevTime = 0
 

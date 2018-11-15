@@ -107,6 +107,27 @@ def cam_loop(queue_from_cam):
 #------------------------------
 '''
 
+import time
+prevTime = 0
+
+def check_fps():
+    global prevTime
+
+    #현재 시간 가져오기 (초단위로 가져옴)
+    curTime = time.time()
+
+    #현재 시간에서 이전 시간을 빼면?
+    #한번 돌아온 시간!!
+    sec = curTime - prevTime
+    #이전 시간을 현재시간으로 다시 저장시킴
+    prevTime = curTime
+
+    # 프레임 계산 한바퀴 돌아온 시간을 1초로 나누면 된다.
+    # 1 / time per frame
+    fps = 1/(sec)
+
+    return fps
+
 
 def tts_animation(message, tts, av, web_api, gsp, obj_track, param, loop_path=[]):
     '''
@@ -211,8 +232,8 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         dialog_flag = q_iter < q_length
 
 
-    #video_stream = True
-    video_stream = False
+    video_stream = True
+    #video_stream = False
 
     if video_stream == True:
         # -----------------------------------------------
@@ -742,6 +763,9 @@ def main(stt_enable=1, tts_enable=1, ani_multiprocessing=1, cam_id=0):
         winname = "Face Recognition"
         cv2.namedWindow(winname)
         cv2.moveWindow(winname, 1280, 10)
+
+        cv2.putText(frame, "fps: {:.2f}".format(check_fps()), (10, 130), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 30, 20),
+                    2)  # calculate fps and put text on the frame
         cv2.imshow(winname,frame)   # When Google Speech stt crashes, comment this out!
 
 
