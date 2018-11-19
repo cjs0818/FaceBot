@@ -8,6 +8,8 @@ export PATH=/usr/loca/bin:$PATH
 #-----------------------------------
 # RoS
 source /opt/ros/kinetic/setup.bash
+export ROS_IP=$(hostname -I)
+export ROS_MASTER_URI=http://$ROS_IP:11311
 
 
 #########################
