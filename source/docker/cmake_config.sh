@@ -1,0 +1,20 @@
+PREFIX=`pyenv prefix`
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local/ \
+-D INSTALL_C_EXAMPLES=OFF \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D BUILD_opencv_python3=ON \
+-D BUILD_opencv_legacy=OFF \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.0/modules \
+-D BUILD_EXAMPLES=ON \
+-D PYTHON_EXECUTABLE="$PREFIX"/bin/python \
+-D PYTHON_LIBRARY="$PREFIX"/lib/libpython3.6m.a \
+-D PYTHON_INCLUDE_DIR="$PREFIX"/include/python3.6m \
+-D PYTHON_INCLUDE_DIRS="$PREFIX"/include/python3.6m \
+-D PYTHON_INCLUDE_DIRS2="$PREFIX"/include/python3.6m \
+-D INCLUDE_DIRS="$PREFIX"/include/python3.6m \
+-D INCLUDE_DIRS2="$PREFIX"/include/python3.6m \
+-D PYTHON_PACKAGES_PATH="$PREFIX"/lib/python3.6/site-packages \
+-D PYTHON_NUMPY_INCLUDE_DIR="$PREFIX"/lib/python3.6/site-packages/numpy/core/include ..
