@@ -41,7 +41,7 @@
 - Download git source files in you work directory
 ```
 $ git clone https://github.com/cjs0818/FaceBot.git   # if you don't have git installed, then install with "sudo apt-get install git"
-$ cd FaceBot  # Let's say this director is BASE_DIR
+$ cd FaceBot/source  # Let's say this director is BASE_DIR
 ```
 
 - Set PYTHONPATH environment variable
